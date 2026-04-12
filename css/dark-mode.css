@@ -1,0 +1,125 @@
+/* ============================================================
+   Adawix — dark-mode.css  |  2026 Redesign
+   Light Mode Overrides (dark is now the default)
+   ============================================================ */
+
+/* ── Light Mode ── */
+html.light {
+  --bg:            #f6f5ff;
+  --bg-card:       rgba(255,255,255,.9);
+  --bg-section:    rgba(139,92,246,.04);
+  --bg-elevated:   #ffffff;
+  --text:          #0d0d1a;
+  --text-muted:    #525270;
+  --text-light:    #9898b8;
+  --border:        rgba(0,0,0,.08);
+  --border-strong: rgba(0,0,0,.15);
+  --glass-bg:      rgba(255,255,255,.82);
+  --glass-border:  rgba(139,92,246,.18);
+  --shadow-md:     0 4px 24px rgba(139,92,246,.1);
+  --shadow-lg:     0 8px 48px rgba(139,92,246,.14);
+  --shadow-violet: 0 0 40px rgba(139,92,246,.15);
+}
+
+html.light body { background: #f6f5ff; }
+
+html.light body::before {
+  background:
+    radial-gradient(ellipse 80% 60% at 15% 10%, rgba(139,92,246,.08) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 50% at 85% 85%, rgba(34,211,238,.05) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 50% at 50% 50%, rgba(244,114,182,.04) 0%, transparent 65%);
+}
+
+/* Header */
+html.light .site-header {
+  background: rgba(246,245,255,.85);
+  border-bottom-color: rgba(139,92,246,.12);
+}
+html.light .site-nav a:hover,
+html.light .site-nav a.active {
+  background: rgba(139,92,246,.07);
+  color: var(--violet-dark);
+}
+html.light .nav-toggle { background: rgba(255,255,255,.8); }
+html.light .site-nav   { background: rgba(246,245,255,.97); }
+
+/* Search */
+html.light .search-bar {
+  background: rgba(255,255,255,.85);
+  border-color: rgba(139,92,246,.2);
+  box-shadow: 0 8px 40px rgba(139,92,246,.1);
+}
+html.light .search-bar input { color: #0d0d1a; }
+html.light .search-bar input::placeholder { color: #aaa; }
+html.light .search-bar:focus-within {
+  border-color: rgba(139,92,246,.5);
+  box-shadow: 0 8px 40px rgba(139,92,246,.1), 0 0 0 3px rgba(139,92,246,.1);
+}
+
+/* Stats */
+html.light .stat-item {
+  background: rgba(255,255,255,.75);
+  border-color: rgba(139,92,246,.15);
+}
+
+/* Cards */
+html.light .tool-card {
+  background: rgba(255,255,255,.85);
+  border-color: rgba(139,92,246,.12);
+}
+html.light .tool-card:hover {
+  box-shadow: 0 8px 40px rgba(139,92,246,.15);
+}
+
+html.light .category-card {
+  background: rgba(255,255,255,.85);
+  border-color: rgba(139,92,246,.12);
+}
+html.light .cat-icon {
+  background: rgba(255,255,255,.6);
+  border-color: rgba(0,0,0,.08);
+}
+
+/* Feature cards */
+html.light .feature-card {
+  background: rgba(255,255,255,.85);
+  border-color: rgba(139,92,246,.12);
+}
+
+/* FAQ */
+html.light .faq-item {
+  background: rgba(255,255,255,.85);
+  border-color: rgba(139,92,246,.12);
+}
+
+/* Ads */
+html.light .ad-placeholder {
+  background: rgba(0,0,0,.03);
+  border-color: rgba(0,0,0,.1);
+}
+
+/* Footer */
+html.light .site-footer {
+  background: rgba(12,8,30,.97);
+}
+
+/* Aurora orbs - lighter in light mode */
+html.light .aurora-orb-1 {
+  background: radial-gradient(circle, rgba(139,92,246,.22) 0%, transparent 70%);
+}
+html.light .aurora-orb-2 {
+  background: radial-gradient(circle, rgba(34,211,238,.14) 0%, transparent 70%);
+}
+html.light .aurora-orb-3 {
+  background: radial-gradient(circle, rgba(244,114,182,.12) 0%, transparent 70%);
+}
+
+/* Mobile nav */
+@media (max-width: 900px) {
+  html.light .site-nav { background: rgba(246,245,255,.98); }
+}
+
+/* ── Toggle icons ── */
+/* In light mode: show moon to go back to dark */
+html.light .dark-toggle svg.icon-moon { display: block; }
+html.light .dark-toggle svg.icon-sun  { display: none; }

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عداد تكرار الكلمات - Adawix</title>
+  <meta name="description" content="تحليل تكرار الكلمات في النص العربي والإنجليزي مع رسم بياني وجدول مفصل. تصدير النتائج كـ CSV.">
+  <link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/css/components.css"><link rel="stylesheet" href="/css/dark-mode.css"><link rel="stylesheet" href="/css/tools.css">
+</head>
+<body>
+<main id="main-content">
+  <div class="container"><nav class="breadcrumbs"><a href="/">الرئيسية</a><span class="sep">›</span><a href="/text-tools/">أدوات النصوص</a><span class="sep">›</span><span class="current">تكرار الكلمات</span></nav></div>
+  <section class="tool-page"><div class="container">
+    <div class="tool-header"><h1>عداد تكرار الكلمات</h1><p>الصق نصك وستحصل على جدول بتكرار كل كلمة ورسم بياني لأكثر 10 كلمات تكراراً.</p></div>
+    <div class="tool-layout">
+      <div class="tool-main"><div class="tool-box">
+        <label class="tool-label">النص</label>
+        <textarea id="wfInput" class="tool-textarea" placeholder="الصق نصك هنا..."></textarea>
+        <div class="tool-actions" style="margin-top:var(--sp-4)">
+          <button id="wfRun" class="btn btn-primary">📊 تحليل</button>
+          <select id="wfSort" class="tool-select"><option value="freq">ترتيب حسب التكرار</option><option value="alpha">ترتيب أبجدي</option></select>
+          <button id="wfCSV" class="btn btn-secondary">⬇ تصدير CSV</button>
+        </div>
+        <div id="wfChart" style="margin:var(--sp-6) 0"></div>
+        <div style="overflow-x:auto;margin-top:var(--sp-4)">
+          <table class="data-table">
+            <thead><tr><th>#</th><th>الكلمة</th><th>العدد</th><th>النسبة</th></tr></thead>
+            <tbody id="wfBody"></tbody>
+          </table>
+        </div>
+      </div></div>
+      <aside class="tool-sidebar"><div class="ad-container ad-rectangle"><div class="ad-placeholder">مساحة إعلانية 300×250</div></div></aside>
+    </div>
+  </div></section>
+</main>
+<script src="/js/main.js"></script><script src="/js/tools/word-frequency.js"></script>
+</body>
+</html>

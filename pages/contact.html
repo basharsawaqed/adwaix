@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>اتصل بنا - Adawix</title>
+  <link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/css/components.css"><link rel="stylesheet" href="/css/dark-mode.css"><link rel="stylesheet" href="/css/tools.css">
+</head>
+<body>
+<main id="main-content">
+  <div class="container"><nav class="breadcrumbs"><a href="/">الرئيسية</a><span class="sep">›</span><span class="current">اتصل بنا</span></nav></div>
+  <section class="section"><div class="container" style="max-width:600px">
+    <h1 style="margin-bottom:var(--sp-3)">اتصل بنا</h1>
+    <p style="color:var(--text-muted);margin-bottom:var(--sp-8)">يسعدنا سماع اقتراحاتك وآرائك. أرسل لنا رسالتك وسنرد في أقرب وقت ممكن.</p>
+    <div class="tool-box">
+      <form id="contactForm" novalidate>
+        <div style="margin-bottom:var(--sp-4)">
+          <label class="tool-label" for="cfName">الاسم</label>
+          <input type="text" id="cfName" class="tool-input" placeholder="اسمك الكريم" required>
+        </div>
+        <div style="margin-bottom:var(--sp-4)">
+          <label class="tool-label" for="cfEmail">البريد الإلكتروني</label>
+          <input type="email" id="cfEmail" class="tool-input" placeholder="email@example.com" required>
+        </div>
+        <div style="margin-bottom:var(--sp-4)">
+          <label class="tool-label" for="cfSubject">الموضوع</label>
+          <select id="cfSubject" class="tool-select w-full">
+            <option>اقتراح أداة جديدة</option>
+            <option>الإبلاغ عن مشكلة</option>
+            <option>استفسار عام</option>
+            <option>شراكة أو إعلانات</option>
+            <option>أخرى</option>
+          </select>
+        </div>
+        <div style="margin-bottom:var(--sp-6)">
+          <label class="tool-label" for="cfMsg">الرسالة</label>
+          <textarea id="cfMsg" class="tool-textarea" style="min-height:160px" placeholder="اكتب رسالتك هنا..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg w-full">📨 إرسال الرسالة</button>
+      </form>
+    </div>
+  </div></section>
+</main>
+<script src="/js/main.js"></script>
+<script>
+document.getElementById('contactForm')?.addEventListener('submit', e => {
+  e.preventDefault();
+  showToast('شكراً! تم استلام رسالتك وسنرد قريباً.', 'success', 5000);
+  e.target.reset();
+});
+</script>
+</body>
+</html>

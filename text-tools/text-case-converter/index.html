@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>محول حالة النص - Adawix</title>
+  <meta name="description" content="حوّل النص بين الأحرف الكبيرة والصغيرة وحالة العنوان وحالة الجملة مجاناً.">
+  <link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/css/components.css"><link rel="stylesheet" href="/css/dark-mode.css"><link rel="stylesheet" href="/css/tools.css">
+</head>
+<body>
+<main id="main-content">
+  <div class="container">
+    <nav class="breadcrumbs"><a href="/">الرئيسية</a><span class="sep">›</span><a href="/text-tools/">أدوات النصوص</a><span class="sep">›</span><span class="current">محول حالة النص</span></nav>
+  </div>
+  <section class="tool-page"><div class="container">
+    <div class="tool-header"><h1>محول حالة النص</h1><p>اختر نوع التحويل وسيتم تطبيقه فورياً على النص المدخل.</p></div>
+    <div class="tool-layout">
+      <div class="tool-main"><div class="tool-box">
+        <label class="tool-label">النص الأصلي</label>
+        <textarea id="tcInput" class="tool-textarea" placeholder="اكتب أو الصق نصك هنا..."></textarea>
+        <div class="tool-actions" style="flex-wrap:wrap;margin-top:var(--sp-4)">
+          <button data-case="upper"           class="btn btn-secondary">UPPERCASE</button>
+          <button data-case="lower"           class="btn btn-secondary">lowercase</button>
+          <button data-case="title"           class="btn btn-secondary">Title Case</button>
+          <button data-case="sentence"        class="btn btn-secondary">Sentence case</button>
+          <button data-case="invert"          class="btn btn-secondary">iNVERT cASE</button>
+          <button data-case="remove-tashkeel" class="btn btn-secondary">إزالة التشكيل</button>
+        </div>
+        <label class="tool-label mt-4">النتيجة</label>
+        <textarea id="tcOutput" class="tool-textarea" readonly placeholder="ستظهر النتيجة هنا..."></textarea>
+        <div class="tool-actions"><button id="tcCopy" class="btn btn-primary">📋 نسخ</button><button id="tcClear" class="btn btn-secondary">مسح</button></div>
+      </div></div>
+      <aside class="tool-sidebar"><div class="ad-container ad-rectangle"><div class="ad-placeholder">مساحة إعلانية 300×250</div></div></aside>
+    </div>
+  </div></section>
+</main>
+<script src="/js/main.js"></script><script src="/js/tools/text-case-converter.js"></script>
+</body>
+</html>

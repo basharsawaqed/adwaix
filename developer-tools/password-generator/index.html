@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مولد كلمات المرور القوية - Adawix</title>
+  <meta name="description" content="أنشئ كلمات مرور قوية وآمنة مجاناً. تحكم في الطول والأحرف والرموز مع مقياس القوة.">
+  <link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/css/components.css"><link rel="stylesheet" href="/css/dark-mode.css"><link rel="stylesheet" href="/css/tools.css">
+</head>
+<body>
+<main id="main-content">
+  <div class="container"><nav class="breadcrumbs"><a href="/">الرئيسية</a><span class="sep">›</span><a href="/developer-tools/">أدوات المطورين</a><span class="sep">›</span><span class="current">مولد كلمات المرور</span></nav></div>
+  <section class="tool-page"><div class="container">
+    <div class="tool-header"><h1>مولد كلمات المرور</h1><p>اضبط الخيارات واضغط "توليد" للحصول على كلمات مرور آمنة.</p></div>
+    <div class="tool-layout">
+      <div class="tool-main"><div class="tool-box">
+        <div style="margin-bottom:var(--sp-4)">
+          <label class="tool-label">طول كلمة المرور</label>
+          <div class="range-wrap"><input type="range" id="pgLen" min="8" max="64" value="16"><span class="range-value" id="pgLenVal">16</span></div>
+        </div>
+        <div class="options-row" style="margin-bottom:var(--sp-4)">
+          <label class="option-check"><input type="checkbox" id="pgUpper" checked> أحرف كبيرة (A-Z)</label>
+          <label class="option-check"><input type="checkbox" id="pgLower" checked> أحرف صغيرة (a-z)</label>
+          <label class="option-check"><input type="checkbox" id="pgNum"   checked> أرقام (0-9)</label>
+          <label class="option-check"><input type="checkbox" id="pgSym"> رموز (!@#$)</label>
+          <label class="option-check"><input type="checkbox" id="pgExSimilar"> استبعاد المتشابهة (0,O,l,1)</label>
+        </div>
+        <div style="margin-bottom:var(--sp-4)">
+          <label class="tool-label">عدد كلمات المرور</label>
+          <select id="pgCount" class="tool-select"><option value="1">1</option><option value="5">5</option><option value="10">10</option><option value="20">20</option></select>
+        </div>
+        <button id="pgGenerate" class="btn btn-primary">🔑 توليد</button>
+        <div style="margin-top:var(--sp-4)">
+          <div class="strength-bar" id="pgStrength">
+            <div class="strength-segment"></div><div class="strength-segment"></div>
+            <div class="strength-segment"></div><div class="strength-segment"></div>
+          </div>
+          <div class="strength-label" id="pgStrengthLabel"></div>
+        </div>
+        <div id="pgOutput" style="margin-top:var(--sp-4)"></div>
+      </div></div>
+      <aside class="tool-sidebar"><div class="ad-container ad-rectangle"><div class="ad-placeholder">مساحة إعلانية 300×250</div></div></aside>
+    </div>
+  </div></section>
+</main>
+<script src="/js/main.js"></script><script src="/js/tools/password-generator.js"></script>
+</body>
+</html>

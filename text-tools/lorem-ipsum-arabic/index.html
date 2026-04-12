@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مولد النصوص العشوائية العربية - Adawix</title>
+  <meta name="description" content="مولد نصوص عربية وهمية Lorem Ipsum مجاني للمصممين ومطوري الويب. اختر عدد الفقرات واللغة وانسخ النتيجة.">
+  <link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/css/components.css"><link rel="stylesheet" href="/css/dark-mode.css"><link rel="stylesheet" href="/css/tools.css">
+</head>
+<body>
+<main id="main-content">
+  <div class="container"><nav class="breadcrumbs"><a href="/">الرئيسية</a><span class="sep">›</span><a href="/text-tools/">أدوات النصوص</a><span class="sep">›</span><span class="current">مولد النصوص</span></nav></div>
+  <section class="tool-page"><div class="container">
+    <div class="tool-header"><h1>مولد النصوص العشوائية العربية</h1><p>أنشئ نصوصاً وهمية Lorem Ipsum للمصممين. اختر العدد واللغة واضغط "توليد".</p></div>
+    <div class="tool-layout">
+      <div class="tool-main"><div class="tool-box">
+        <div class="tool-actions">
+          <div>
+            <label class="tool-label">عدد الفقرات</label>
+            <div class="range-wrap"><input type="range" id="liCount" min="1" max="20" value="3"><span class="range-value" id="liCountVal">3</span></div>
+          </div>
+          <div>
+            <label class="tool-label">اللغة</label>
+            <select id="liLang" class="tool-select"><option value="ar">عربي</option><option value="en">Lorem Ipsum (إنجليزي)</option></select>
+          </div>
+          <button id="liGenerate" class="btn btn-primary">✨ توليد</button>
+        </div>
+        <label class="tool-label mt-4">النتيجة</label>
+        <textarea id="liOutput" class="tool-textarea" style="min-height:280px" readonly placeholder="ستظهر النصوص هنا بعد الضغط على توليد..."></textarea>
+        <div class="tool-actions"><button id="liCopy" class="btn btn-primary">📋 نسخ</button></div>
+      </div></div>
+      <aside class="tool-sidebar"><div class="ad-container ad-rectangle"><div class="ad-placeholder">مساحة إعلانية 300×250</div></div></aside>
+    </div>
+  </div></section>
+</main>
+<script src="/js/main.js"></script><script src="/js/tools/lorem-ipsum-ar.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ضغط الصور مجاناً - Adawix</title>
+  <meta name="description" content="ضغط صور JPG وPNG وWEBP مجاناً في متصفحك. تحكم في جودة الإخراج وشاهد نسبة التوفير.">
+  <link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/css/components.css"><link rel="stylesheet" href="/css/dark-mode.css"><link rel="stylesheet" href="/css/tools.css">
+</head>
+<body>
+<main id="main-content">
+  <div class="container"><nav class="breadcrumbs"><a href="/">الرئيسية</a><span class="sep">›</span><a href="/image-tools/">أدوات الصور</a><span class="sep">›</span><span class="current">ضغط الصور</span></nav></div>
+  <section class="tool-page"><div class="container">
+    <div class="tool-header"><h1>ضغط الصور</h1><p>ارفع صورتك وحدد مستوى الجودة وسيتم ضغطها فورياً في متصفحك.</p></div>
+    <div class="tool-layout">
+      <div class="tool-main"><div class="tool-box">
+        <div class="drop-zone" id="icDrop">
+          <input type="file" id="icFile" accept="image/jpeg,image/png,image/webp">
+          <div class="drop-icon">🖼️</div>
+          <h3>اسحب الصورة هنا أو اضغط للاختيار</h3>
+          <p>يدعم: JPG، PNG، WEBP — الحد الأقصى 50 MB</p>
+        </div>
+        <div class="tool-actions" style="margin-top:var(--sp-6)">
+          <label class="tool-label" style="margin:0">جودة الضغط:</label>
+          <div class="range-wrap" style="flex:1"><input type="range" id="icQuality" min="10" max="100" value="80"><span class="range-value" id="icQualVal">80%</span></div>
+          <button id="icCompress" class="btn btn-primary" disabled>⚡ ضغط</button>
+        </div>
+        <div id="icResult" hidden style="margin-top:var(--sp-6)">
+          <div class="stats-grid">
+            <div class="stat-box"><span class="num" id="icOrigSize">-</span><div class="lbl">الحجم الأصلي</div></div>
+            <div class="stat-box"><span class="num" id="icCompSize">-</span><div class="lbl">بعد الضغط</div></div>
+            <div class="stat-box"><span class="num" id="icSaved" style="color:var(--success)">-</span><div class="lbl">توفير</div></div>
+          </div>
+          <div class="result-img-wrap mt-4"><img id="icPreview" alt="معاينة الصورة المضغوطة"></div>
+          <div class="tool-actions mt-4"><button id="icDownload" class="btn btn-primary" disabled>⬇ تحميل</button></div>
+        </div>
+      </div></div>
+      <aside class="tool-sidebar"><div class="ad-container ad-rectangle"><div class="ad-placeholder">مساحة إعلانية 300×250</div></div></aside>
+    </div>
+  </div></section>
+</main>
+<script src="/js/main.js"></script><script src="/js/tools/image-compressor.js"></script>
+</body>
+</html>

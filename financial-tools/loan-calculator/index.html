@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>حاسبة القروض البنكية - Adawix</title>
+  <meta name="description" content="حاسبة قروض بنكية مجانية: احسب قسطك الشهري والفائدة الإجمالية مع جدول إهلاك كامل.">
+  <link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/css/components.css"><link rel="stylesheet" href="/css/dark-mode.css"><link rel="stylesheet" href="/css/tools.css">
+</head>
+<body>
+<main id="main-content">
+  <div class="container"><nav class="breadcrumbs"><a href="/">الرئيسية</a><span class="sep">›</span><a href="/financial-tools/">أدوات مالية</a><span class="sep">›</span><span class="current">حاسبة القروض</span></nav></div>
+  <section class="tool-page"><div class="container">
+    <div class="tool-header"><h1>حاسبة القروض البنكية</h1><p>أدخل مبلغ القرض وسعر الفائدة والمدة للحصول على القسط الشهري وجدول السداد الكامل.</p></div>
+    <div class="tool-layout">
+      <div class="tool-main"><div class="tool-box">
+        <div class="grid-3" style="gap:var(--sp-4);margin-bottom:var(--sp-4)">
+          <div><label class="tool-label">مبلغ القرض (د.أ)</label><input type="number" id="lcAmount" class="tool-input" placeholder="10000" min="0"></div>
+          <div><label class="tool-label">سعر الفائدة السنوي (%)</label><input type="number" id="lcRate" class="tool-input" placeholder="8.5" step="0.1" min="0"></div>
+          <div style="display:flex;gap:8px;align-items:flex-end">
+            <div style="flex:1"><label class="tool-label">مدة القرض</label><input type="number" id="lcTerm" class="tool-input" placeholder="36" min="1"></div>
+            <select id="lcTermUnit" class="tool-select"><option value="months">شهر</option><option value="years">سنة</option></select>
+          </div>
+        </div>
+        <button id="lcCalc" class="btn btn-primary">🔢 احتساب</button>
+        <div id="lcResult" hidden style="margin-top:var(--sp-6)">
+          <div class="stats-grid">
+            <div class="stat-box"><span class="num" id="lcMonthly">-</span><div class="lbl">القسط الشهري</div></div>
+            <div class="stat-box"><span class="num" id="lcTotal">-</span><div class="lbl">إجمالي الدفعات</div></div>
+            <div class="stat-box"><span class="num" id="lcInterest" style="color:var(--error)">-</span><div class="lbl">إجمالي الفائدة</div></div>
+          </div>
+          <h3 style="margin-top:var(--sp-6);margin-bottom:var(--sp-3)">جدول الإهلاك</h3>
+          <div style="overflow-x:auto;max-height:400px;overflow-y:auto">
+            <table class="data-table">
+              <thead><tr><th>الشهر</th><th>القسط</th><th>أصل الدين</th><th>الفائدة</th><th>الرصيد</th></tr></thead>
+              <tbody id="lcBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div></div>
+      <aside class="tool-sidebar"><div class="ad-container ad-rectangle"><div class="ad-placeholder">مساحة إعلانية 300×250</div></div></aside>
+    </div>
+  </div></section>
+</main>
+<script src="/js/main.js"></script><script src="/js/tools/loan-calculator.js"></script>
+</body>
+</html>

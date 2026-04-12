@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>محول العملات - Adawix</title>
+  <meta name="description" content="محول عملات مجاني بأسعار صرف محدثة. حوّل الدينار الأردني والدولار واليورو والريال وأكثر من 150 عملة.">
+  <link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/css/components.css"><link rel="stylesheet" href="/css/dark-mode.css"><link rel="stylesheet" href="/css/tools.css">
+</head>
+<body>
+<main id="main-content">
+  <div class="container"><nav class="breadcrumbs"><a href="/">الرئيسية</a><span class="sep">›</span><a href="/financial-tools/">أدوات مالية</a><span class="sep">›</span><span class="current">محول العملات</span></nav></div>
+  <section class="tool-page"><div class="container">
+    <div class="tool-header"><h1>محول العملات</h1><p>أسعار صرف محدثة يومياً. أدخل المبلغ واختر العملة.</p></div>
+    <div class="tool-layout">
+      <div class="tool-main"><div class="tool-box">
+        <div style="margin-bottom:var(--sp-4)">
+          <p class="tool-label">أزواج شائعة</p>
+          <div style="display:flex;flex-wrap:wrap;gap:var(--sp-2)">
+            <button data-pair="JOD-USD" class="btn btn-secondary btn-sm">JOD → USD</button>
+            <button data-pair="JOD-EUR" class="btn btn-secondary btn-sm">JOD → EUR</button>
+            <button data-pair="JOD-SAR" class="btn btn-secondary btn-sm">JOD → SAR</button>
+            <button data-pair="USD-JOD" class="btn btn-secondary btn-sm">USD → JOD</button>
+            <button data-pair="EUR-USD" class="btn btn-secondary btn-sm">EUR → USD</button>
+          </div>
+        </div>
+        <div class="grid-3" style="gap:var(--sp-4);align-items:end;margin-bottom:var(--sp-4)">
+          <div><label class="tool-label">من</label>
+          <select id="ccFrom" class="tool-select w-full">
+            <option value="JOD" selected>JOD - الدينار الأردني</option>
+            <option value="USD">USD - الدولار الأمريكي</option>
+            <option value="EUR">EUR - اليورو</option>
+            <option value="GBP">GBP - الجنيه الإسترليني</option>
+            <option value="SAR">SAR - الريال السعودي</option>
+            <option value="AED">AED - الدرهم الإماراتي</option>
+            <option value="KWD">KWD - الدينار الكويتي</option>
+            <option value="EGP">EGP - الجنيه المصري</option>
+            <option value="QAR">QAR - الريال القطري</option>
+            <option value="TRY">TRY - الليرة التركية</option>
+            <option value="CNY">CNY - اليوان الصيني</option>
+            <option value="JPY">JPY - الين الياباني</option>
+          </select></div>
+          <div style="text-align:center"><button id="ccSwap" class="btn btn-secondary" aria-label="تبديل العملتين">⇌</button></div>
+          <div><label class="tool-label">إلى</label>
+          <select id="ccTo" class="tool-select w-full">
+            <option value="USD" selected>USD - الدولار الأمريكي</option>
+            <option value="JOD">JOD - الدينار الأردني</option>
+            <option value="EUR">EUR - اليورو</option>
+            <option value="GBP">GBP - الجنيه الإسترليني</option>
+            <option value="SAR">SAR - الريال السعودي</option>
+            <option value="AED">AED - الدرهم الإماراتي</option>
+            <option value="KWD">KWD - الدينار الكويتي</option>
+            <option value="EGP">EGP - الجنيه المصري</option>
+            <option value="QAR">QAR - الريال القطري</option>
+            <option value="TRY">TRY - الليرة التركية</option>
+            <option value="CNY">CNY - اليوان الصيني</option>
+            <option value="JPY">JPY - الين الياباني</option>
+          </select></div>
+        </div>
+        <div style="margin-bottom:var(--sp-4)"><label class="tool-label">المبلغ</label><input type="number" id="ccAmount" class="tool-input" value="1" min="0" step="any"></div>
+        <button id="ccConvert" class="btn btn-primary btn-lg">💱 تحويل</button>
+        <div style="margin-top:var(--sp-6);padding:var(--sp-6);background:var(--bg-section);border-radius:var(--radius-md)">
+          <div id="ccResult" style="font-size:1.5rem;font-weight:800;color:var(--primary);margin-bottom:var(--sp-2)">أدخل مبلغاً واضغط تحويل</div>
+          <div id="ccRate" style="font-size:.875rem;color:var(--text-muted)"></div>
+          <div id="ccUpdated" style="font-size:.8rem;color:var(--text-light);margin-top:var(--sp-1)"></div>
+        </div>
+      </div></div>
+      <aside class="tool-sidebar"><div class="ad-container ad-rectangle"><div class="ad-placeholder">مساحة إعلانية 300×250</div></div></aside>
+    </div>
+  </div></section>
+</main>
+<script src="/js/main.js"></script><script src="/js/tools/currency-converter.js"></script>
+</body>
+</html>
