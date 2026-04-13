@@ -19,15 +19,15 @@
 </head>
 <body>
 <main id="main-content">
-  <div class="container"><nav class="breadcrumbs"><a href="/">الرئيسية</a><span class="sep">›</span><a href="/pdf-tools/">أدوات PDF</a><span class="sep">›</span><span class="current">دمج PDF</span></nav></div>
+  <div class="container"><nav class="breadcrumbs"><a href="/" data-i18n="bc.home">الرئيسية</a><span class="sep">›</span><a href="/pdf-tools/" data-i18n="bc.pdf-tools">أدوات PDF</a><span class="sep">›</span><span class="current" data-i18n="tool.pdf-merger.bc">دمج PDF</span></nav></div>
   <section class="tool-page"><div class="container">
-    <div class="tool-header"><h1>دمج ملفات PDF</h1><p>ارفع ملفات PDF واضغط "دمج" للحصول على ملف واحد. كل المعالجة في متصفحك.</p></div>
+    <div class="tool-header"><h1 data-i18n="tool.pdf-merger.title">دمج ملفات PDF</h1><p data-i18n="tool.pdf-merger.desc">ارفع ملفات PDF واضغط "دمج" للحصول على ملف واحد. كل المعالجة في متصفحك.</p></div>
     <div class="tool-layout">
       <div class="tool-main"><div class="tool-box">
         <div class="drop-zone" id="pmDrop"><input type="file" id="pmFile" accept="application/pdf" multiple><div class="drop-icon">📄</div><h3>اسحب ملفات PDF هنا</h3><p>يمكنك رفع أكثر من ملف — الحد الأقصى 50 MB لكل ملف</p></div>
         <div class="file-list" id="pmList"></div>
         <div id="pmProgress" hidden class="progress-wrap mt-4"><div class="progress-bar"><div class="progress-fill" id="pmFill" style="width:0"></div></div><div class="progress-label">جاري الدمج...</div></div>
-        <div class="tool-actions mt-4"><button id="pmMerge" class="btn btn-primary" disabled>🔗 دمج وتحميل</button></div>
+        <div class="tool-actions mt-4"><button id="pmMerge" class="btn btn-primary" disabled data-i18n="tool.pdf-merger.btn">🔗 دمج وتحميل</button></div>
       </div></div>
       <aside class="tool-sidebar"><div class="ad-container ad-rectangle"><div class="ad-placeholder">مساحة إعلانية 300×250</div></div></aside>
     </div>

@@ -123,3 +123,45 @@ html.light .aurora-orb-3 {
 /* In light mode: show moon to go back to dark */
 html.light .dark-toggle svg.icon-moon { display: block; }
 html.light .dark-toggle svg.icon-sun  { display: none; }
+
+/* ── Language Toggle Button ── */
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; height: 40px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--glass-bg);
+  color: var(--text-muted);
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  transition: color var(--transition), border-color var(--transition), background var(--transition), box-shadow var(--transition);
+  backdrop-filter: blur(8px);
+}
+.lang-toggle:hover {
+  color: var(--violet-light);
+  border-color: rgba(139,92,246,.5);
+  background: rgba(139,92,246,.1);
+  box-shadow: 0 0 16px rgba(139,92,246,.2);
+}
+/* AR mode: show EN label (to switch to English) */
+html[lang="ar"] .lang-toggle .lang-en { display: block; }
+html[lang="ar"] .lang-toggle .lang-ar { display: none; }
+/* EN mode: show عر label (to switch to Arabic) */
+html[lang="en"] .lang-toggle .lang-en { display: none; }
+html[lang="en"] .lang-toggle .lang-ar { display: block; }
+
+/* ── LTR / English Mode ── */
+html[lang="en"] body {
+  direction: ltr;
+  text-align: left;
+}
+html[lang="en"] .skip-link {
+  right: auto;
+  left: 0;
+}
+/* Keep code/mono areas always LTR */
+html[lang="en"] .tool-textarea,
+html[lang="en"] .json-output { direction: ltr; text-align: left; }

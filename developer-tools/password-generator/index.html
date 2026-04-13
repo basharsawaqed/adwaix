@@ -19,27 +19,27 @@
 </head>
 <body>
 <main id="main-content">
-  <div class="container"><nav class="breadcrumbs"><a href="/">الرئيسية</a><span class="sep">›</span><a href="/developer-tools/">أدوات المطورين</a><span class="sep">›</span><span class="current">مولد كلمات المرور</span></nav></div>
+  <div class="container"><nav class="breadcrumbs"><a href="/" data-i18n="bc.home">الرئيسية</a><span class="sep">›</span><a href="/developer-tools/" data-i18n="bc.developer-tools">أدوات المطورين</a><span class="sep">›</span><span class="current" data-i18n="tool.password.bc">مولد كلمات المرور</span></nav></div>
   <section class="tool-page"><div class="container">
-    <div class="tool-header"><h1>مولد كلمات المرور</h1><p>اضبط الخيارات واضغط "توليد" للحصول على كلمات مرور آمنة.</p></div>
+    <div class="tool-header"><h1 data-i18n="tool.password.title">مولد كلمات المرور</h1><p data-i18n="tool.password.desc">اضبط الخيارات واضغط "توليد" للحصول على كلمات مرور آمنة.</p></div>
     <div class="tool-layout">
       <div class="tool-main"><div class="tool-box">
         <div style="margin-bottom:var(--sp-4)">
-          <label class="tool-label">طول كلمة المرور</label>
+          <label class="tool-label" data-i18n="tool.password.length">طول كلمة المرور</label>
           <div class="range-wrap"><input type="range" id="pgLen" min="8" max="64" value="16"><span class="range-value" id="pgLenVal">16</span></div>
         </div>
         <div class="options-row" style="margin-bottom:var(--sp-4)">
-          <label class="option-check"><input type="checkbox" id="pgUpper" checked> أحرف كبيرة (A-Z)</label>
-          <label class="option-check"><input type="checkbox" id="pgLower" checked> أحرف صغيرة (a-z)</label>
-          <label class="option-check"><input type="checkbox" id="pgNum"   checked> أرقام (0-9)</label>
-          <label class="option-check"><input type="checkbox" id="pgSym"> رموز (!@#$)</label>
-          <label class="option-check"><input type="checkbox" id="pgExSimilar"> استبعاد المتشابهة (0,O,l,1)</label>
+          <label class="option-check"><input type="checkbox" id="pgUpper" checked> <span data-i18n="tool.password.uppercase">أحرف كبيرة (A-Z)</span></label>
+          <label class="option-check"><input type="checkbox" id="pgLower" checked> <span data-i18n="tool.password.lowercase">أحرف صغيرة (a-z)</span></label>
+          <label class="option-check"><input type="checkbox" id="pgNum"   checked> <span data-i18n="tool.password.numbers">أرقام (0-9)</span></label>
+          <label class="option-check"><input type="checkbox" id="pgSym"> <span data-i18n="tool.password.symbols">رموز (!@#$)</span></label>
+          <label class="option-check"><input type="checkbox" id="pgExSimilar"> <span data-i18n="tool.password.exsimilar">استبعاد المتشابهة (0,O,l,1)</span></label>
         </div>
         <div style="margin-bottom:var(--sp-4)">
-          <label class="tool-label">عدد كلمات المرور</label>
+          <label class="tool-label" data-i18n="tool.password.count">عدد كلمات المرور</label>
           <select id="pgCount" class="tool-select"><option value="1">1</option><option value="5">5</option><option value="10">10</option><option value="20">20</option></select>
         </div>
-        <button id="pgGenerate" class="btn btn-primary">🔑 توليد</button>
+        <button id="pgGenerate" class="btn btn-primary" data-i18n="tool.password.btn">🔑 توليد</button>
         <div style="margin-top:var(--sp-4)">
           <div class="strength-bar" id="pgStrength">
             <div class="strength-segment"></div><div class="strength-segment"></div>

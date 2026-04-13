@@ -19,15 +19,15 @@
 </head>
 <body>
 <main id="main-content">
-  <div class="container"><nav class="breadcrumbs"><a href="/">الرئيسية</a><span class="sep">›</span><a href="/image-tools/">أدوات الصور</a><span class="sep">›</span><span class="current">تغيير الحجم</span></nav></div>
+  <div class="container"><nav class="breadcrumbs"><a href="/" data-i18n="bc.home">الرئيسية</a><span class="sep">›</span><a href="/image-tools/" data-i18n="bc.image-tools">أدوات الصور</a><span class="sep">›</span><span class="current" data-i18n="tool.img-resizer.bc">تغيير الحجم</span></nav></div>
   <section class="tool-page"><div class="container">
-    <div class="tool-header"><h1>تغيير حجم الصورة</h1><p>ارفع صورتك وحدد الأبعاد الجديدة، أو اختر حجماً جاهزاً لمنصات التواصل.</p></div>
+    <div class="tool-header"><h1 data-i18n="tool.img-resizer.title">تغيير حجم الصورة</h1><p data-i18n="tool.img-resizer.desc">ارفع صورتك وحدد الأبعاد الجديدة، أو اختر حجماً جاهزاً لمنصات التواصل.</p></div>
     <div class="tool-layout">
       <div class="tool-main"><div class="tool-box">
         <div class="drop-zone" id="irDrop"><input type="file" id="irFile" accept="image/*"><div class="drop-icon">📐</div><h3>اسحب الصورة أو اضغط للاختيار</h3><p>الحد الأقصى 50 MB</p></div>
         <div id="irInfo" style="font-size:.85rem;color:var(--text-muted);margin-top:var(--sp-3)"></div>
         <div style="margin-top:var(--sp-4)">
-          <p class="tool-label">أبعاد جاهزة لمنصات التواصل</p>
+          <p class="tool-label" data-i18n="tool.img-resizer.presets">أبعاد جاهزة لمنصات التواصل</p>
           <div style="display:flex;flex-wrap:wrap;gap:var(--sp-2);margin-bottom:var(--sp-4)">
             <button data-preset="instagram-post" class="btn btn-secondary btn-sm">Instagram (1080×1080)</button>
             <button data-preset="facebook-cover" class="btn btn-secondary btn-sm">Facebook Cover</button>
@@ -36,15 +36,15 @@
             <button data-preset="whatsapp-dp" class="btn btn-secondary btn-sm">WhatsApp DP</button>
           </div>
           <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:var(--sp-3);align-items:center">
-            <div><label class="tool-label">العرض (px)</label><input type="number" id="irWidth" class="tool-input" placeholder="1920"></div>
+            <div><label class="tool-label" data-i18n="tool.img-resizer.width">العرض (px)</label><input type="number" id="irWidth" class="tool-input" placeholder="1920"></div>
             <label class="option-check" style="flex-direction:column;font-size:.75rem"><input type="checkbox" id="irLock" checked> 🔒</label>
-            <div><label class="tool-label">الارتفاع (px)</label><input type="number" id="irHeight" class="tool-input" placeholder="1080"></div>
+            <div><label class="tool-label" data-i18n="tool.img-resizer.height">الارتفاع (px)</label><input type="number" id="irHeight" class="tool-input" placeholder="1080"></div>
           </div>
         </div>
-        <div class="tool-actions mt-4"><button id="irResize" class="btn btn-primary" disabled>🔄 تغيير الحجم</button></div>
+        <div class="tool-actions mt-4"><button id="irResize" class="btn btn-primary" disabled data-i18n="tool.img-resizer.btn">🔄 تغيير الحجم</button></div>
         <div id="irResult" hidden style="margin-top:var(--sp-6)">
           <div class="result-img-wrap"><img id="irPreview" alt="معاينة"></div>
-          <div class="tool-actions mt-4"><button id="irDownload" class="btn btn-primary" disabled>⬇ تحميل</button></div>
+          <div class="tool-actions mt-4"><button id="irDownload" class="btn btn-primary" disabled data-i18n="tool.img-resizer.dl">⬇ تحميل</button></div>
         </div>
       </div></div>
       <aside class="tool-sidebar"><div class="ad-container ad-rectangle"><div class="ad-placeholder">مساحة إعلانية 300×250</div></div></aside>

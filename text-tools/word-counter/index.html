@@ -18,9 +18,9 @@
 <main id="main-content">
   <div class="container">
     <nav class="breadcrumbs" aria-label="مسار التنقل">
-      <a href="/">الرئيسية</a><span class="sep">›</span>
-      <a href="/text-tools/">أدوات النصوص</a><span class="sep">›</span>
-      <span class="current">عداد الكلمات</span>
+      <a href="/" data-i18n="bc.home">الرئيسية</a><span class="sep">›</span>
+      <a href="/text-tools/" data-i18n="bc.text-tools">أدوات النصوص</a><span class="sep">›</span>
+      <span class="current" data-i18n="tool.word-counter.bc">عداد الكلمات</span>
     </nav>
   </div>
 
@@ -29,26 +29,26 @@
   <section class="tool-page">
     <div class="container">
       <div class="tool-header">
-        <h1>عداد الكلمات والحروف</h1>
-        <p>الصق أو اكتب نصك في الحقل أدناه وسيتم احتساب الكلمات والحروف والجمل والفقرات ووقت القراءة فورياً.</p>
+        <h1 data-i18n="tool.word-counter.title">عداد الكلمات والحروف</h1>
+        <p data-i18n="tool.word-counter.desc">الصق أو اكتب نصك في الحقل أدناه وسيتم احتساب الكلمات والحروف والجمل والفقرات ووقت القراءة فورياً.</p>
       </div>
       <div class="tool-layout">
         <div class="tool-main">
           <div class="tool-box">
-            <label class="tool-label" for="wcInput">أدخل النص هنا</label>
-            <textarea id="wcInput" class="tool-textarea" style="min-height:240px" placeholder="اكتب أو الصق نصك هنا..." aria-label="منطقة إدخال النص"></textarea>
+            <label class="tool-label" for="wcInput" data-i18n="tool.word-counter.label">أدخل النص هنا</label>
+            <textarea id="wcInput" class="tool-textarea" style="min-height:240px" placeholder="اكتب أو الصق نصك هنا..." data-i18n-ph="tool.word-counter.ph" aria-label="منطقة إدخال النص"></textarea>
             <div class="tool-actions">
-              <button class="btn btn-primary" id="wcCopy">📋 نسخ النص</button>
-              <button class="btn btn-secondary" id="wcPaste">📌 لصق</button>
-              <button class="btn btn-secondary" id="wcClear">🗑️ مسح</button>
+              <button class="btn btn-primary" id="wcCopy" data-i18n="tool.word-counter.copy-btn">📋 نسخ النص</button>
+              <button class="btn btn-secondary" id="wcPaste" data-i18n="tool.word-counter.paste">📌 لصق</button>
+              <button class="btn btn-secondary" id="wcClear" data-i18n="tool.word-counter.clear">🗑️ مسح</button>
             </div>
             <div class="stats-grid">
-              <div class="stat-box"><span class="num" id="wcWords">0</span><div class="lbl">كلمة</div></div>
-              <div class="stat-box"><span class="num" id="wcChars">0</span><div class="lbl">حرف</div></div>
-              <div class="stat-box"><span class="num" id="wcNoSpace">0</span><div class="lbl">بدون مسافات</div></div>
-              <div class="stat-box"><span class="num" id="wcSentences">0</span><div class="lbl">جملة</div></div>
-              <div class="stat-box"><span class="num" id="wcParas">0</span><div class="lbl">فقرة</div></div>
-              <div class="stat-box"><span class="num" id="wcRead">0 دقيقة</span><div class="lbl">وقت القراءة</div></div>
+              <div class="stat-box"><span class="num" id="wcWords">0</span><div class="lbl" data-i18n="tool.word-counter.words">كلمة</div></div>
+              <div class="stat-box"><span class="num" id="wcChars">0</span><div class="lbl" data-i18n="tool.word-counter.chars">حرف</div></div>
+              <div class="stat-box"><span class="num" id="wcNoSpace">0</span><div class="lbl" data-i18n="tool.word-counter.nospace">بدون مسافات</div></div>
+              <div class="stat-box"><span class="num" id="wcSentences">0</span><div class="lbl" data-i18n="tool.word-counter.sents">جملة</div></div>
+              <div class="stat-box"><span class="num" id="wcParas">0</span><div class="lbl" data-i18n="tool.word-counter.paras">فقرة</div></div>
+              <div class="stat-box"><span class="num" id="wcRead">0 دقيقة</span><div class="lbl" data-i18n="tool.word-counter.read">وقت القراءة</div></div>
             </div>
           </div>
 

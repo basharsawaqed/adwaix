@@ -19,29 +19,29 @@
 </head>
 <body>
 <main id="main-content">
-  <div class="container"><nav class="breadcrumbs"><a href="/">الرئيسية</a><span class="sep">›</span><a href="/image-tools/">أدوات الصور</a><span class="sep">›</span><span class="current">محول الصيغ</span></nav></div>
+  <div class="container"><nav class="breadcrumbs"><a href="/" data-i18n="bc.home">الرئيسية</a><span class="sep">›</span><a href="/image-tools/" data-i18n="bc.image-tools">أدوات الصور</a><span class="sep">›</span><span class="current" data-i18n="tool.img-converter.bc">محول الصيغ</span></nav></div>
   <section class="tool-page"><div class="container">
-    <div class="tool-header"><h1>محول صيغ الصور</h1><p>ارفع صورة وحدد الصيغة المطلوبة وسيتم التحويل فورياً.</p></div>
+    <div class="tool-header"><h1 data-i18n="tool.img-converter.title">محول صيغ الصور</h1><p data-i18n="tool.img-converter.desc">ارفع صورة وحدد الصيغة المطلوبة وسيتم التحويل فورياً.</p></div>
     <div class="tool-layout">
       <div class="tool-main"><div class="tool-box">
         <div class="drop-zone" id="convDrop"><input type="file" id="convFile" accept="image/*"><div class="drop-icon">🔄</div><h3>اسحب صورتك هنا</h3><p>يدعم: JPG، PNG، WEBP، BMP، GIF</p></div>
         <div class="tool-actions" style="margin-top:var(--sp-4)">
-          <div><label class="tool-label">تحويل إلى</label>
+          <div><label class="tool-label" data-i18n="tool.img-converter.format">تحويل إلى</label>
           <select id="convFormat" class="tool-select">
             <option value="image/jpeg">JPG</option>
             <option value="image/png">PNG</option>
             <option value="image/webp">WEBP</option>
             <option value="image/bmp">BMP</option>
           </select></div>
-          <button id="convRun" class="btn btn-primary" disabled>⚡ تحويل</button>
+          <button id="convRun" class="btn btn-primary" disabled data-i18n="tool.img-converter.btn">⚡ تحويل</button>
         </div>
         <div id="convQualRow" style="margin-top:var(--sp-3)">
-          <label class="tool-label">جودة الإخراج</label>
+          <label class="tool-label" data-i18n="tool.img-converter.quality">جودة الإخراج</label>
           <div class="range-wrap"><input type="range" id="convQuality" min="10" max="100" value="92"><span class="range-value" id="convQualVal">92%</span></div>
         </div>
         <div id="convResult" hidden style="margin-top:var(--sp-6)">
           <div class="result-img-wrap"><img id="convPreview" alt="معاينة"></div>
-          <div class="tool-actions mt-4"><button id="convDownload" class="btn btn-primary" disabled>⬇ تحميل</button></div>
+          <div class="tool-actions mt-4"><button id="convDownload" class="btn btn-primary" disabled data-i18n="tool.img-converter.dl">⬇ تحميل</button></div>
         </div>
       </div></div>
       <aside class="tool-sidebar"><div class="ad-container ad-rectangle"><div class="ad-placeholder">مساحة إعلانية 300×250</div></div></aside>

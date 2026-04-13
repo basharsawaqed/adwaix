@@ -19,30 +19,30 @@
 </head>
 <body>
 <main id="main-content">
-  <div class="container"><nav class="breadcrumbs"><a href="/">الرئيسية</a><span class="sep">›</span><a href="/image-tools/">أدوات الصور</a><span class="sep">›</span><span class="current">ضغط الصور</span></nav></div>
+  <div class="container"><nav class="breadcrumbs"><a href="/" data-i18n="bc.home">الرئيسية</a><span class="sep">›</span><a href="/image-tools/" data-i18n="bc.image-tools">أدوات الصور</a><span class="sep">›</span><span class="current" data-i18n="tool.img-compressor.bc">ضغط الصور</span></nav></div>
   <section class="tool-page"><div class="container">
-    <div class="tool-header"><h1>ضغط الصور</h1><p>ارفع صورتك وحدد مستوى الجودة وسيتم ضغطها فورياً في متصفحك.</p></div>
+    <div class="tool-header"><h1 data-i18n="tool.img-compressor.title">ضغط الصور</h1><p data-i18n="tool.img-compressor.desc">ارفع صورتك وحدد مستوى الجودة وسيتم ضغطها فورياً في متصفحك.</p></div>
     <div class="tool-layout">
       <div class="tool-main"><div class="tool-box">
         <div class="drop-zone" id="icDrop">
           <input type="file" id="icFile" accept="image/jpeg,image/png,image/webp">
           <div class="drop-icon">🖼️</div>
-          <h3>اسحب الصورة هنا أو اضغط للاختيار</h3>
+          <h3 data-i18n="tool.img-compressor.drop-h">اسحب الصورة هنا أو اضغط للاختيار</h3>
           <p>يدعم: JPG، PNG، WEBP — الحد الأقصى 50 MB</p>
         </div>
         <div class="tool-actions" style="margin-top:var(--sp-6)">
-          <label class="tool-label" style="margin:0">جودة الضغط:</label>
+          <label class="tool-label" style="margin:0" data-i18n="tool.img-compressor.quality">جودة الضغط:</label>
           <div class="range-wrap" style="flex:1"><input type="range" id="icQuality" min="10" max="100" value="80"><span class="range-value" id="icQualVal">80%</span></div>
-          <button id="icCompress" class="btn btn-primary" disabled>⚡ ضغط</button>
+          <button id="icCompress" class="btn btn-primary" disabled data-i18n="tool.img-compressor.btn">⚡ ضغط</button>
         </div>
         <div id="icResult" hidden style="margin-top:var(--sp-6)">
           <div class="stats-grid">
-            <div class="stat-box"><span class="num" id="icOrigSize">-</span><div class="lbl">الحجم الأصلي</div></div>
-            <div class="stat-box"><span class="num" id="icCompSize">-</span><div class="lbl">بعد الضغط</div></div>
-            <div class="stat-box"><span class="num" id="icSaved" style="color:var(--success)">-</span><div class="lbl">توفير</div></div>
+            <div class="stat-box"><span class="num" id="icOrigSize">-</span><div class="lbl" data-i18n="tool.img-compressor.orig">الحجم الأصلي</div></div>
+            <div class="stat-box"><span class="num" id="icCompSize">-</span><div class="lbl" data-i18n="tool.img-compressor.comp">بعد الضغط</div></div>
+            <div class="stat-box"><span class="num" id="icSaved" style="color:var(--success)">-</span><div class="lbl" data-i18n="tool.img-compressor.saved">توفير</div></div>
           </div>
           <div class="result-img-wrap mt-4"><img id="icPreview" alt="معاينة الصورة المضغوطة"></div>
-          <div class="tool-actions mt-4"><button id="icDownload" class="btn btn-primary" disabled>⬇ تحميل</button></div>
+          <div class="tool-actions mt-4"><button id="icDownload" class="btn btn-primary" disabled data-i18n="tool.img-compressor.dl">⬇ تحميل</button></div>
         </div>
       </div></div>
       <aside class="tool-sidebar"><div class="ad-container ad-rectangle"><div class="ad-placeholder">مساحة إعلانية 300×250</div></div></aside>

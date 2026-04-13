@@ -19,35 +19,35 @@
 </head>
 <body>
 <main id="main-content">
-  <div class="container"><nav class="breadcrumbs"><a href="/">الرئيسية</a><span class="sep">›</span><a href="/developer-tools/">أدوات المطورين</a><span class="sep">›</span><span class="current">مولد QR Code</span></nav></div>
+  <div class="container"><nav class="breadcrumbs"><a href="/" data-i18n="bc.home">الرئيسية</a><span class="sep">›</span><a href="/developer-tools/" data-i18n="bc.developer-tools">أدوات المطورين</a><span class="sep">›</span><span class="current" data-i18n="tool.qr.bc">مولد QR Code</span></nav></div>
   <section class="tool-page"><div class="container">
-    <div class="tool-header"><h1>مولد QR Code</h1><p>أنشئ رمز QR لأي رابط أو نص أو بيانات. حمّله كصورة PNG.</p></div>
+    <div class="tool-header"><h1 data-i18n="tool.qr.title">مولد QR Code</h1><p data-i18n="tool.qr.desc">أنشئ رمز QR لأي رابط أو نص أو بيانات. حمّله كصورة PNG.</p></div>
     <div class="tool-layout">
       <div class="tool-main"><div class="tool-box">
         <div style="margin-bottom:var(--sp-4)">
-          <label class="tool-label">نوع المحتوى</label>
+          <label class="tool-label" data-i18n="tool.qr.type">نوع المحتوى</label>
           <select id="qrType" class="tool-select">
-            <option value="url">رابط (URL)</option>
-            <option value="text">نص</option>
-            <option value="email">بريد إلكتروني</option>
-            <option value="phone">رقم هاتف</option>
-            <option value="wifi">شبكة WiFi</option>
+            <option value="url" data-i18n="tool.qr.opt-url">رابط (URL)</option>
+            <option value="text" data-i18n="tool.qr.opt-text">نص</option>
+            <option value="email" data-i18n="tool.qr.opt-email">بريد إلكتروني</option>
+            <option value="phone" data-i18n="tool.qr.opt-phone">رقم هاتف</option>
+            <option value="wifi" data-i18n="tool.qr.opt-wifi">شبكة WiFi</option>
           </select>
         </div>
         <div id="qrFields" style="margin-bottom:var(--sp-4)"></div>
         <div class="grid-3" style="gap:var(--sp-4);margin-bottom:var(--sp-4)">
-          <div><label class="tool-label">الحجم</label>
-          <select id="qrSize" class="tool-select"><option value="128">صغير (128)</option><option value="256" selected>متوسط (256)</option><option value="512">كبير (512)</option></select></div>
-          <div><label class="tool-label">لون الرمز</label><div class="color-wrap"><input type="color" id="qrFG" value="#000000"><span>اللون الأمامي</span></div></div>
-          <div><label class="tool-label">لون الخلفية</label><div class="color-wrap"><input type="color" id="qrBG" value="#ffffff"><span>خلفية</span></div></div>
+          <div><label class="tool-label" data-i18n="tool.qr.size">الحجم</label>
+          <select id="qrSize" class="tool-select"><option value="128" data-i18n="tool.qr.size-sm">صغير (128)</option><option value="256" selected data-i18n="tool.qr.size-md">متوسط (256)</option><option value="512" data-i18n="tool.qr.size-lg">كبير (512)</option></select></div>
+          <div><label class="tool-label" data-i18n="tool.qr.fg-color">لون الرمز</label><div class="color-wrap"><input type="color" id="qrFG" value="#000000"><span data-i18n="tool.qr.fg-label">اللون الأمامي</span></div></div>
+          <div><label class="tool-label" data-i18n="tool.qr.bg-color">لون الخلفية</label><div class="color-wrap"><input type="color" id="qrBG" value="#ffffff"><span data-i18n="tool.qr.bg-label">خلفية</span></div></div>
         </div>
         <div style="margin-bottom:var(--sp-4)">
-          <label class="tool-label">مستوى تصحيح الخطأ</label>
-          <select id="qrEC" class="tool-select"><option value="L">منخفض (L)</option><option value="M" selected>متوسط (M)</option><option value="Q">عالي (Q)</option><option value="H">مرتفع جداً (H)</option></select>
+          <label class="tool-label" data-i18n="tool.qr.ec">مستوى تصحيح الخطأ</label>
+          <select id="qrEC" class="tool-select"><option value="L" data-i18n="tool.qr.ec-l">منخفض (L)</option><option value="M" selected data-i18n="tool.qr.ec-m">متوسط (M)</option><option value="Q" data-i18n="tool.qr.ec-q">عالي (Q)</option><option value="H" data-i18n="tool.qr.ec-h">مرتفع جداً (H)</option></select>
         </div>
-        <button id="qrGenerate" class="btn btn-primary">⚡ توليد QR</button>
+        <button id="qrGenerate" class="btn btn-primary" data-i18n="tool.qr.btn">⚡ توليد QR</button>
         <div class="qr-wrap mt-4" id="qrOutput"></div>
-        <div class="tool-actions mt-4"><button id="qrDownloadPNG" class="btn btn-secondary" disabled>⬇ تحميل PNG</button></div>
+        <div class="tool-actions mt-4"><button id="qrDownloadPNG" class="btn btn-secondary" disabled data-i18n="tool.qr.download">⬇ تحميل PNG</button></div>
       </div></div>
       <aside class="tool-sidebar"><div class="ad-container ad-rectangle"><div class="ad-placeholder">مساحة إعلانية 300×250</div></div></aside>
     </div>
