@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+  <title>اختصار الروابط مجاناً - Adawix</title>
+  <meta name="description" content="اختصر أي رابط طويل بضغطة واحدة مجاناً. أنشئ روابط قصيرة سهلة المشاركة بدون تسجيل.">
+  <meta name="keywords" content="اختصار الروابط, رابط قصير, URL shortener, تقصير الرابط, adawix">
+  <link rel="canonical" href="https://adawix.com/developer-tools/url-shortener/">
+  <link rel="alternate" hreflang="ar"        href="https://adawix.com/developer-tools/url-shortener/" />
+  <link rel="alternate" hreflang="ar-SA"     href="https://adawix.com/developer-tools/url-shortener/" />
+  <link rel="alternate" hreflang="ar-AE"     href="https://adawix.com/developer-tools/url-shortener/" />
+  <link rel="alternate" hreflang="ar-KW"     href="https://adawix.com/developer-tools/url-shortener/" />
+  <link rel="alternate" hreflang="x-default" href="https://adawix.com/developer-tools/url-shortener/" />
+  <meta property="og:title" content="اختصار الروابط مجاناً - Adawix">
+  <meta property="og:description" content="اختصر أي رابط طويل بضغطة واحدة مجاناً. بدون تسجيل.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://adawix.com/developer-tools/url-shortener/">
+  <meta property="og:locale" content="ar_AR">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"الرئيسية","item":"https://adawix.com/"},{"@type":"ListItem","position":2,"name":"أدوات المطورين","item":"https://adawix.com/developer-tools/"},{"@type":"ListItem","position":3,"name":"اختصار الروابط","item":"https://adawix.com/developer-tools/url-shortener/"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"اختصار الروابط","url":"https://adawix.com/developer-tools/url-shortener/","applicationCategory":"UtilityApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"HowTo","name":"كيفية اختصار رابط","step":[{"@type":"HowToStep","name":"الصق الرابط الطويل","text":"انسخ الرابط الطويل والصقه في حقل الإدخال."},{"@type":"HowToStep","name":"اضغط اختصار","text":"اضغط زر الاختصار وانتظر ثانية واحدة."},{"@type":"HowToStep","name":"انسخ الرابط القصير","text":"انسخ الرابط القصير وشاركه أينما تريد."}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"هل اختصار الروابط مجاني؟","acceptedAnswer":{"@type":"Answer","text":"نعم، الأداة مجانية تماماً ولا تتطلب تسجيلاً أو اشتراكاً."}},{"@type":"Question","name":"من أين تأتي الروابط القصيرة؟","acceptedAnswer":{"@type":"Answer","text":"تستخدم الأداة خدمة is.gd المجانية والموثوقة لإنشاء الروابط القصيرة."}},{"@type":"Question","name":"هل الرابط القصير دائم؟","acceptedAnswer":{"@type":"Answer","text":"نعم، الروابط القصيرة التي يُنشئها is.gd دائمة ولا تنتهي صلاحيتها."}},{"@type":"Question","name":"هل يمكن اختصار أي رابط؟","acceptedAnswer":{"@type":"Answer","text":"نعم، يمكن اختصار أي رابط صالح يبدأ بـ http:// أو https://."}}]}</script>
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/dark-mode.css">
+  <link rel="stylesheet" href="/css/tools.css">
+</head>
+<body>
+<main id="main-content">
+  <div class="container">
+    <nav class="breadcrumbs">
+      <a href="/" data-i18n="bc.home">الرئيسية</a>
+      <span class="sep">›</span>
+      <a href="/developer-tools/" data-i18n="bc.developer-tools">أدوات المطورين</a>
+      <span class="sep">›</span>
+      <span class="current" data-i18n="tool.shorten.bc">اختصار الروابط</span>
+    </nav>
+  </div>
+
+  <section class="tool-page"><div class="container">
+    <div class="tool-header">
+      <h1 data-i18n="tool.shorten.title">اختصار الروابط</h1>
+      <p data-i18n="tool.shorten.desc">اختصر أي رابط طويل بضغطة واحدة. مجاني، بدون تسجيل.</p>
+    </div>
+
+    <div class="tool-layout">
+      <div class="tool-main">
+        <div class="tool-box">
+
+          <!-- Input -->
+          <div style="margin-bottom:var(--sp-4)">
+            <label class="tool-label" data-i18n="tool.shorten.label">الرابط الطويل</label>
+            <div style="display:flex;gap:var(--sp-2)">
+              <input type="url" id="urlInput" class="tool-input" placeholder="https://example.com/very-long-url/path?query=value" style="flex:1" data-i18n-ph="tool.shorten.ph">
+              <button id="urlPaste" class="btn btn-secondary" title="لصق من الحافظة" data-i18n="tool.shorten.paste">📋 لصق</button>
+            </div>
+          </div>
+
+          <!-- Provider -->
+          <div style="margin-bottom:var(--sp-4)">
+            <label class="tool-label" data-i18n="tool.shorten.provider">مزود الاختصار</label>
+            <div style="display:flex;gap:var(--sp-2);flex-wrap:wrap">
+              <label class="provider-opt active" id="prov-isgd">
+                <input type="radio" name="provider" value="isgd" checked> is.gd
+              </label>
+              <label class="provider-opt" id="prov-vgd">
+                <input type="radio" name="provider" value="vgd"> v.gd
+              </label>
+            </div>
+          </div>
+
+          <!-- Button -->
+          <button id="urlShorten" class="btn btn-primary btn-lg" data-i18n="tool.shorten.btn">✂️ اختصر الرابط</button>
+
+          <!-- Result -->
+          <div id="urlResult" style="display:none;margin-top:var(--sp-6);padding:var(--sp-5);background:var(--bg-section);border-radius:var(--radius-md);border:1px solid var(--border)">
+            <div style="font-size:.8rem;color:var(--text-muted);margin-bottom:var(--sp-2)" data-i18n="tool.shorten.result-label">الرابط القصير</div>
+            <div style="display:flex;align-items:center;gap:var(--sp-2);flex-wrap:wrap">
+              <a id="urlShort" href="#" target="_blank" rel="noopener" style="font-size:1.3rem;font-weight:800;color:var(--primary);word-break:break-all;flex:1"></a>
+              <button id="urlCopy" class="btn btn-primary" data-i18n="tool.shorten.copy">📋 نسخ</button>
+              <button id="urlOpen" class="btn btn-secondary" data-i18n="tool.shorten.open">↗ فتح</button>
+            </div>
+            <div id="urlOriginal" style="font-size:.75rem;color:var(--text-light);margin-top:var(--sp-3);word-break:break-all"></div>
+
+            <!-- QR for short link -->
+            <div style="margin-top:var(--sp-4)">
+              <div style="font-size:.8rem;color:var(--text-muted);margin-bottom:var(--sp-2)" data-i18n="tool.shorten.qr-label">رمز QR للرابط القصير</div>
+              <div id="urlQR" style="display:inline-block;background:#fff;padding:8px;border-radius:8px"></div>
+              <div style="margin-top:var(--sp-2)">
+                <button id="urlDLQR" class="btn btn-secondary btn-sm" data-i18n="tool.shorten.qr-dl">⬇ تحميل QR</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- History -->
+          <div id="urlHistory" style="margin-top:var(--sp-6);display:none">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--sp-3)">
+              <span class="tool-label" data-i18n="tool.shorten.history">السجل الأخير</span>
+              <button id="urlClearHistory" class="btn btn-secondary btn-sm" data-i18n="tool.shorten.clear-history">🗑 مسح</button>
+            </div>
+            <div id="urlHistoryList"></div>
+          </div>
+
+        </div>
+      </div>
+
+      <aside class="tool-sidebar">
+        <div class="ad-container ad-rectangle"><div class="ad-placeholder"></div></div>
+      </aside>
+    </div>
+  </div></section>
+</main>
+
+<style>
+  .provider-opt {
+    display: inline-flex; align-items: center; gap: .4rem;
+    padding: .45rem .9rem; border-radius: 8px; cursor: pointer;
+    border: 1px solid var(--border); font-size: .875rem; font-weight: 600;
+    color: var(--text-muted); transition: all .15s; user-select: none;
+  }
+  .provider-opt input { display: none; }
+  .provider-opt.active { border-color: var(--primary); color: var(--primary); background: rgba(var(--primary-rgb, 34,211,238),.08); }
+  .history-item {
+    display: flex; align-items: center; gap: .5rem; padding: .6rem .75rem;
+    border-radius: 8px; background: var(--bg-section); margin-bottom: .5rem;
+    border: 1px solid var(--border);
+  }
+  .history-item a { color: var(--primary); font-weight: 700; font-size: .875rem; text-decoration: none; flex: 1; min-width: 0; }
+  .history-item a:hover { text-decoration: underline; }
+  .history-item .hist-orig { font-size: .7rem; color: var(--text-light); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 180px; }
+  .history-item .hist-copy { flex-shrink: 0; }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/tools/url-shortener.js"></script>
+</body>
+</html>
