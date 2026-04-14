@@ -206,8 +206,11 @@ p:last-child { margin-bottom: 0; }
 .fade-in-delay-3   { animation-delay: .36s; }
 
 /* ── Scroll reveal ── */
-.reveal         { opacity: 0; transform: translateY(24px); transition: opacity .65s ease, transform .65s ease; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
+/* Default: visible (for crawlers, no-JS users, reduced-motion) */
+.reveal { transition: opacity .65s ease, transform .65s ease; }
+/* Only hide when JS is running — added by initScrollReveal() */
+.js-reveal-ready .reveal         { opacity: 0; transform: translateY(24px); }
+.js-reveal-ready .reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* ── Skip link ── */
 .skip-link {

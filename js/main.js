@@ -736,6 +736,8 @@ window.validateFile = function(file, maxMB = 50) {
 
 /* ── Scroll Reveal ── */
 function initScrollReveal() {
+  // Mark the document so CSS hides .reveal elements — only when JS is running
+  document.documentElement.classList.add('js-reveal-ready');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
   }, { threshold: 0.1 });
