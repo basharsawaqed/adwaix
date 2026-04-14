@@ -1,23 +1,53 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%"   stop-color="#8b5cf6"/>
-      <stop offset="100%" stop-color="#22d3ee"/>
+    <linearGradient id="gearGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#1a3a6c"/>
+      <stop offset="100%" stop-color="#0f2347"/>
     </linearGradient>
-    <linearGradient id="letter" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%"   stop-color="#ffffff"/>
-      <stop offset="100%" stop-color="#e0f2fe"/>
+    <linearGradient id="swooshGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#22d3ee"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
     </linearGradient>
+    <clipPath id="clip">
+      <rect width="64" height="64" rx="10"/>
+    </clipPath>
   </defs>
-  <!-- Rounded square background -->
-  <rect width="32" height="32" rx="8" fill="url(#bg)"/>
-  <!-- Letter A centered -->
-  <text
-    x="16" y="23"
-    font-family="'Segoe UI', Arial, sans-serif"
-    font-size="20"
-    font-weight="700"
-    text-anchor="middle"
-    fill="url(#letter)"
-  >A</text>
+
+  <!-- Background -->
+  <rect width="64" height="64" rx="10" fill="#0d1b2e"/>
+
+  <!-- Swoosh arc (cyan ring fragment, bottom-left curving up) -->
+  <g clip-path="url(#clip)">
+    <path d="M 4 50 A 38 38 0 0 1 42 4" stroke="url(#swooshGrad)" stroke-width="6" stroke-linecap="round" fill="none" opacity="0.85"/>
+    <path d="M 2 56 A 46 46 0 0 1 50 2" stroke="url(#swooshGrad)" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.45"/>
+  </g>
+
+  <!-- Gear body (dark blue, 9 teeth) -->
+  <path d="M29.28 16.63 L29.53 11.44 L38.47 11.44 L38.72 16.63 L41.55 17.66 L45.08 13.84 L51.92 19.59 L48.78 23.73 L50.29 26.34 L55.44 25.68 L56.99 34.48 L51.93 35.63 L51.40 38.60 L55.77 41.41 L51.31 49.15 L46.68 46.77 L44.38 48.71 L45.91 53.67 L37.52 56.73 L35.51 51.94 L32.49 51.94 L30.48 56.73 L22.09 53.67 L23.62 48.71 L21.32 46.77 L16.69 49.15 L12.23 41.41 L16.60 38.60 L16.07 35.63 L11.01 34.48 L12.56 25.68 L17.71 26.34 L19.22 23.73 L16.08 19.59 L22.92 13.84 L26.45 17.66 Z"
+    fill="url(#gearGrad)" stroke="#22a8c4" stroke-width="0.8"/>
+
+  <!-- Gear center hole -->
+  <circle cx="34" cy="34" r="10" fill="#0d1b2e"/>
+
+  <!-- Wrench (cyan, diagonal top-left to bottom-right) -->
+  <g transform="rotate(-40, 34, 34)">
+    <!-- Wrench handle -->
+    <rect x="33" y="22" width="3" height="16" rx="1.5" fill="#22d3ee"/>
+    <!-- Wrench head (open end) -->
+    <path d="M31.5 22 Q34 19 36.5 22 L36 24 Q34 22.5 32 24 Z" fill="#22d3ee"/>
+    <!-- Wrench nut box -->
+    <rect x="31.5" y="36" width="5" height="4" rx="1" fill="#22d3ee"/>
+  </g>
+
+  <!-- Screwdriver (cyan, diagonal top-right to bottom-left) -->
+  <g transform="rotate(50, 34, 34)">
+    <!-- Handle -->
+    <rect x="32.5" y="23" width="3" height="13" rx="1.5" fill="#0891b2"/>
+    <!-- Shaft (thinner) -->
+    <rect x="33.2" y="36" width="1.6" height="7" rx="0.8" fill="#22d3ee"/>
+    <!-- Flathead tip -->
+    <rect x="32.2" y="42.5" width="3.6" height="1.2" rx="0.3" fill="#22d3ee"/>
+    <!-- Handle top cap -->
+    <rect x="31.5" y="21" width="5" height="3" rx="1.5" fill="#1d6a8a"/>
+  </g>
 </svg>
