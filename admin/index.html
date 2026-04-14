@@ -659,6 +659,23 @@
         <p id="pass-change-msg" style="font-size:.825rem;margin-top:.75rem;display:none"></p>
       </div>
 
+      <div class="card" style="max-width:560px;margin-top:1.5rem">
+        <div class="card-title">📊 Cloudflare Web Analytics <span class="badge" id="cf-badge">غير مُفعَّل</span></div>
+        <p style="color:var(--muted);font-size:.875rem;margin-bottom:1.25rem">
+          يعرض زوار الموقع، بلدانهم، مصادر الزيارات (بحث، مباشر، إحالة) — مجاني تماماً ويحترم الخصوصية.
+        </p>
+        <ol style="color:var(--muted);font-size:.825rem;padding-right:1.25rem;line-height:2;margin-bottom:1.25rem">
+          <li>افتح <a href="https://dash.cloudflare.com" target="_blank" style="color:var(--cyan)">Cloudflare Dashboard</a></li>
+          <li>Analytics &amp; Logs → Web Analytics → <strong style="color:var(--text)">Add a site</strong></li>
+          <li>انسخ الـ token (32 حرف)</li>
+          <li>افتح <code style="color:var(--cyan);font-size:.8rem">js/main.js</code> وضع التوكن في متغير <code style="color:var(--cyan);font-size:.8rem">CF_ANALYTICS_TOKEN</code></li>
+          <li>ادفع للـ Git — يبدأ التتبع فوراً</li>
+        </ol>
+        <a href="https://dash.cloudflare.com/?to=/:account/web-analytics" target="_blank" class="login-btn" style="display:inline-block;text-decoration:none;padding:.6rem 1.25rem;font-size:.875rem;width:auto">
+          فتح Cloudflare Analytics ←
+        </a>
+      </div>
+
       <div class="card" style="max-width:480px;margin-top:1.5rem">
         <div class="card-title">ℹ️ معلومات النظام</div>
         <table class="data-table">

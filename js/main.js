@@ -2,6 +2,21 @@
    Adawix — main.js  |  Header, Footer, Dark Mode, Toast, Cookie, i18n
    ============================================================ */
 
+/* ── Cloudflare Web Analytics ──────────────────────────────────
+   Get your token: Cloudflare Dashboard → Analytics → Web Analytics → Add site
+   Paste the token string below.
+   ─────────────────────────────────────────────────────────── */
+const CF_ANALYTICS_TOKEN = '';   // ← paste your token here
+
+(function () {
+  if (!CF_ANALYTICS_TOKEN) return;
+  var s = document.createElement('script');
+  s.defer = true;
+  s.src = 'https://static.cloudflare.com/beacon.min.js';
+  s.setAttribute('data-cf-beacon', JSON.stringify({ token: CF_ANALYTICS_TOKEN }));
+  document.head.appendChild(s);
+})();
+
 /* ── Translations ── */
 const I18N = {
   ar: {
