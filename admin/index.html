@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adawix Admin</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    :root {
+      --bg:      #080e1a;
+      --surface: #0d1b2e;
+      --card:    #111e35;
+      --border:  rgba(255,255,255,.08);
+      --cyan:    #22d3ee;
+      --violet:  #8b5cf6;
+      --green:   #10b981;
+      --amber:   #f59e0b;
+      --red:     #ef4444;
+      --text:    #e2e8f0;
+      --muted:   #64748b;
+      --font:    'Segoe UI', Tahoma, Arial, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); min-height: 100vh; }
+
+    /* ── LOGIN SCREEN ── */
+    #login-screen {
+      display: flex; align-items: center; justify-content: center;
+      min-height: 100vh; padding: 1rem;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(34,211,238,.08) 0%, transparent 70%);
+    }
+    .login-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 20px; padding: 2.5rem; width: 100%; max-width: 420px;
+      text-align: center; box-shadow: 0 25px 60px rgba(0,0,0,.5);
+    }
+    .login-logo { font-size: 2.5rem; font-weight: 900; letter-spacing: -1px; margin-bottom: .5rem; }
+    .login-logo span { color: var(--cyan); }
+    .login-subtitle { color: var(--muted); font-size: .875rem; margin-bottom: 2rem; }
+    .login-field { position: relative; margin-bottom: 1rem; }
+    .login-field input {
+      width: 100%; padding: .875rem 1.25rem; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 12px; color: var(--text);
+      font-size: 1rem; font-family: var(--font); text-align: center;
+      transition: border-color .2s;
+    }
+    .login-field input:focus { outline: none; border-color: var(--cyan); }
+    .login-field input::placeholder { color: var(--muted); }
+    .login-btn {
+      width: 100%; padding: .875rem; background: linear-gradient(135deg, var(--cyan), #06b6d4);
+      border: none; border-radius: 12px; color: #0d1b2e; font-size: 1rem;
+      font-weight: 700; cursor: pointer; transition: opacity .2s, transform .1s;
+    }
+    .login-btn:hover { opacity: .9; }
+    .login-btn:active { transform: scale(.98); }
+    .login-error {
+      color: var(--red); font-size: .825rem; margin-top: .75rem;
+      display: none; animation: shake .3s;
+    }
+    @keyframes shake {
+      0%,100% { transform: translateX(0); }
+      25% { transform: translateX(-8px); }
+      75% { transform: translateX(8px); }
+    }
+    .login-hint { color: var(--muted); font-size: .75rem; margin-top: 1.5rem; }
+
+    /* ── ADMIN LAYOUT ── */
+    #admin-screen { display: none; min-height: 100vh; }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed; top: 0; right: 0; bottom: 0; width: 240px;
+      background: var(--card); border-left: 1px solid var(--border);
+      padding: 1.5rem 1rem; display: flex; flex-direction: column; gap: .5rem;
+      z-index: 100; overflow-y: auto;
+    }
+    .sidebar-logo { font-size: 1.4rem; font-weight: 900; padding: .5rem .75rem 1.25rem; border-bottom: 1px solid var(--border); margin-bottom: .5rem; }
+    .sidebar-logo span { color: var(--cyan); }
+    .sidebar-logo small { display: block; color: var(--muted); font-size: .7rem; font-weight: 400; margin-top: .15rem; }
+    .nav-item {
+      display: flex; align-items: center; gap: .75rem; padding: .65rem .75rem;
+      border-radius: 10px; cursor: pointer; color: var(--muted); font-size: .875rem;
+      transition: all .15s; text-decoration: none;
+    }
+    .nav-item:hover { background: rgba(255,255,255,.05); color: var(--text); }
+    .nav-item.active { background: rgba(34,211,238,.1); color: var(--cyan); }
+    .nav-icon { font-size: 1.1rem; width: 22px; text-align: center; }
+    .nav-section { color: var(--muted); font-size: .7rem; font-weight: 600; padding: 1rem .75rem .3rem; letter-spacing: .08em; text-transform: uppercase; }
+    .sidebar-footer { margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--border); }
+    .logout-btn {
+      display: flex; align-items: center; gap: .75rem; padding: .65rem .75rem;
+      border-radius: 10px; cursor: pointer; color: var(--muted); font-size: .875rem;
+      background: none; border: none; width: 100%; transition: all .15s;
+    }
+    .logout-btn:hover { color: var(--red); background: rgba(239,68,68,.08); }
+
+    /* Main content */
+    .main { margin-right: 240px; padding: 2rem; min-height: 100vh; }
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* Page header */
+    .page-header { margin-bottom: 2rem; }
+    .page-header h1 { font-size: 1.6rem; font-weight: 800; }
+    .page-header p { color: var(--muted); font-size: .875rem; margin-top: .35rem; }
+
+    /* Stat cards */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .stat-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+      padding: 1.25rem 1.5rem; position: relative; overflow: hidden;
+    }
+    .stat-card::before {
+      content: ''; position: absolute; top: 0; right: 0; width: 80px; height: 80px;
+      border-radius: 50%; opacity: .06;
+    }
+    .stat-card.cyan::before  { background: var(--cyan);   top: -20px; right: -20px; }
+    .stat-card.violet::before { background: var(--violet); top: -20px; right: -20px; }
+    .stat-card.green::before  { background: var(--green);  top: -20px; right: -20px; }
+    .stat-card.amber::before  { background: var(--amber);  top: -20px; right: -20px; }
+    .stat-label { color: var(--muted); font-size: .775rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+    .stat-value { font-size: 2.2rem; font-weight: 900; margin: .25rem 0; line-height: 1; }
+    .stat-card.cyan   .stat-value { color: var(--cyan); }
+    .stat-card.violet .stat-value { color: var(--violet); }
+    .stat-card.green  .stat-value { color: var(--green); }
+    .stat-card.amber  .stat-value { color: var(--amber); }
+    .stat-sub { color: var(--muted); font-size: .775rem; }
+
+    /* Cards */
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem; }
+    .card-title { font-size: 1rem; font-weight: 700; margin-bottom: 1.25rem; display: flex; align-items: center; gap: .5rem; }
+    .card-title .badge {
+      font-size: .7rem; padding: .2rem .6rem; border-radius: 20px;
+      background: rgba(34,211,238,.1); color: var(--cyan); font-weight: 600;
+    }
+
+    /* Checklist */
+    .checklist { display: flex; flex-direction: column; gap: .75rem; }
+    .check-item { display: flex; align-items: center; gap: .875rem; }
+    .check-icon {
+      width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: .75rem;
+    }
+    .check-icon.done   { background: rgba(16,185,129,.15); color: var(--green); }
+    .check-icon.todo   { background: rgba(100,116,139,.1);  color: var(--muted); border: 1px solid var(--border); }
+    .check-icon.wip    { background: rgba(245,158,11,.12);  color: var(--amber); }
+    .check-text { font-size: .875rem; }
+    .check-text.done   { color: var(--text); }
+    .check-text.todo   { color: var(--muted); }
+    .check-text.wip    { color: var(--amber); }
+    .check-sub { color: var(--muted); font-size: .75rem; margin-top: .1rem; }
+
+    /* Progress bar */
+    .progress-wrap { margin: 1.5rem 0 .5rem; }
+    .progress-label { display: flex; justify-content: space-between; font-size: .8rem; margin-bottom: .5rem; }
+    .progress-bar { height: 6px; background: rgba(255,255,255,.06); border-radius: 10px; overflow: hidden; }
+    .progress-fill { height: 100%; border-radius: 10px; background: linear-gradient(90deg, var(--cyan), #06b6d4); transition: width 1s ease; }
+
+    /* Table */
+    .data-table { width: 100%; border-collapse: collapse; }
+    .data-table th { color: var(--muted); font-size: .75rem; text-align: right; padding: .6rem .75rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+    .data-table td { padding: .75rem; font-size: .875rem; border-bottom: 1px solid rgba(255,255,255,.04); vertical-align: middle; }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:hover td { background: rgba(255,255,255,.02); }
+    .pill {
+      display: inline-flex; align-items: center; gap: .3rem;
+      font-size: .725rem; padding: .25rem .65rem; border-radius: 20px; font-weight: 600;
+    }
+    .pill.live   { background: rgba(16,185,129,.12);  color: var(--green); }
+    .pill.todo   { background: rgba(100,116,139,.1);   color: var(--muted); }
+    .pill.wip    { background: rgba(245,158,11,.12);   color: var(--amber); }
+    .pill.high   { background: rgba(139,92,246,.12);   color: var(--violet); }
+    .vol-bar { display: inline-block; height: 4px; background: var(--cyan); border-radius: 4px; opacity: .6; vertical-align: middle; margin-right: .5rem; }
+
+    /* Grid 2-col */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    @media (max-width: 900px) { .grid-2 { grid-template-columns: 1fr; } }
+
+    /* Timeline */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .tl-item { display: flex; gap: 1rem; padding-bottom: 1.5rem; position: relative; }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-left { display: flex; flex-direction: column; align-items: center; gap: 0; }
+    .tl-dot {
+      width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: .75rem;
+      z-index: 1; position: relative;
+    }
+    .tl-dot.done   { background: rgba(16,185,129,.2);  color: var(--green);  border: 2px solid var(--green); }
+    .tl-dot.active { background: rgba(34,211,238,.15); color: var(--cyan);   border: 2px solid var(--cyan);  }
+    .tl-dot.future { background: var(--surface);       color: var(--muted);  border: 2px solid var(--border); }
+    .tl-line { width: 2px; flex: 1; background: var(--border); margin-top: 2px; }
+    .tl-item:last-child .tl-line { display: none; }
+    .tl-content { padding-top: .2rem; }
+    .tl-title { font-size: .9rem; font-weight: 700; }
+    .tl-date  { color: var(--muted); font-size: .75rem; margin-top: .15rem; }
+    .tl-tasks { margin-top: .75rem; display: flex; flex-direction: column; gap: .4rem; }
+    .tl-task  { font-size: .8rem; color: var(--muted); display: flex; align-items: center; gap: .4rem; }
+    .tl-task .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--muted); flex-shrink: 0; }
+    .tl-task.done-t { color: var(--text); }
+    .tl-task.done-t .dot { background: var(--green); }
+
+    /* Quick links */
+    .links-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: .75rem; }
+    .quick-link {
+      display: flex; align-items: center; gap: .75rem; padding: .875rem 1rem;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+      text-decoration: none; color: var(--text); font-size: .825rem; font-weight: 500;
+      transition: all .15s;
+    }
+    .quick-link:hover { border-color: var(--cyan); color: var(--cyan); transform: translateY(-1px); }
+    .quick-link .ql-icon { font-size: 1.2rem; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); border-radius: 4px; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .sidebar { width: 200px; }
+      .main { margin-right: 200px; padding: 1.25rem; }
+    }
+    @media (max-width: 600px) {
+      .sidebar { position: static; width: 100%; border-left: none; border-bottom: 1px solid var(--border); flex-direction: row; flex-wrap: wrap; padding: .75rem; }
+      .main { margin-right: 0; }
+      .nav-section { display: none; }
+      .sidebar-logo small { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════ LOGIN SCREEN ══════════════ -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">Ada<span>wix</span></div>
+    <p class="login-subtitle">لوحة التحكم — Admin Dashboard</p>
+    <div class="login-field">
+      <input type="password" id="pass-input" placeholder="كلمة المرور" autocomplete="current-password" />
+    </div>
+    <button class="login-btn" onclick="tryLogin()">دخول ←</button>
+    <p class="login-error" id="login-error">كلمة المرور غير صحيحة</p>
+    <p class="login-hint">الوصول مقيد • Restricted access</p>
+  </div>
+</div>
+
+<!-- ══════════════ ADMIN SCREEN ══════════════ -->
+<div id="admin-screen">
+
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="sidebar-logo">Ada<span>wix</span> <small>Admin Panel v1.0</small></div>
+
+    <span class="nav-section">عام</span>
+    <a class="nav-item active" data-page="dashboard" onclick="nav(this)">
+      <span class="nav-icon">📊</span> لوحة التحكم
+    </a>
+    <a class="nav-item" data-page="seo" onclick="nav(this)">
+      <span class="nav-icon">🔍</span> SEO &amp; خطة التهيئة
+    </a>
+    <a class="nav-item" data-page="tools" onclick="nav(this)">
+      <span class="nav-icon">🛠️</span> الأدوات
+    </a>
+    <a class="nav-item" data-page="roadmap" onclick="nav(this)">
+      <span class="nav-icon">🗺️</span> خارطة الطريق
+    </a>
+
+    <span class="nav-section">إدارة</span>
+    <a class="nav-item" data-page="links" onclick="nav(this)">
+      <span class="nav-icon">🔗</span> روابط سريعة
+    </a>
+    <a class="nav-item" data-page="settings" onclick="nav(this)">
+      <span class="nav-icon">⚙️</span> الإعدادات
+    </a>
+
+    <div class="sidebar-footer">
+      <button class="logout-btn" onclick="logout()">
+        <span class="nav-icon">🚪</span> تسجيل الخروج
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main -->
+  <main class="main">
+
+    <!-- ── DASHBOARD ── -->
+    <div class="page active" id="page-dashboard">
+      <div class="page-header">
+        <h1>لوحة التحكم الرئيسية</h1>
+        <p>نظرة عامة على أداء وحالة Adawix</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card cyan">
+          <div class="stat-label">أدوات مباشرة</div>
+          <div class="stat-value">15</div>
+          <div class="stat-sub">في 5 تصنيفات</div>
+        </div>
+        <div class="stat-card violet">
+          <div class="stat-label">صفحات مفهرسة</div>
+          <div class="stat-value">26</div>
+          <div class="stat-sub">HTML مع Schema</div>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-label">تغطية hreflang</div>
+          <div class="stat-value">100%</div>
+          <div class="stat-sub">ar · ar-SA · ar-AE · ar-KW</div>
+        </div>
+        <div class="stat-card amber">
+          <div class="stat-label">تقدم الخطة</div>
+          <div class="stat-value">38%</div>
+          <div class="stat-sub">Phase 1 من 12 شهراً</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">✅ مهام Phase 1 <span class="badge">6 / 11 مكتملة</span></div>
+          <div class="progress-wrap">
+            <div class="progress-label"><span>التقدم</span><span>55%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:55%"></div></div>
+          </div>
+          <div class="checklist" style="margin-top:1.25rem">
+            <div class="check-item"><div class="check-icon done">✓</div><div><div class="check-text done">Meta tags — كل الصفحات</div></div></div>
+            <div class="check-item"><div class="check-icon done">✓</div><div><div class="check-text done">HowTo + FAQPage schema</div></div></div>
+            <div class="check-item"><div class="check-icon done">✓</div><div><div class="check-text done">BreadcrumbList schema</div></div></div>
+            <div class="check-item"><div class="check-icon done">✓</div><div><div class="check-text done">hreflang Gulf targeting</div></div></div>
+            <div class="check-item"><div class="check-icon done">✓</div><div><div class="check-text done">Favicon مطابق للبراند</div></div></div>
+            <div class="check-item"><div class="check-icon done">✓</div><div><div class="check-text done">EN/AR language toggle</div></div></div>
+            <div class="check-item"><div class="check-icon wip">⏳</div><div><div class="check-text wip">Internal linking (كل أداة → 3 أدوات مرتبطة)</div></div></div>
+            <div class="check-item"><div class="check-icon todo">○</div><div><div class="check-text todo">Google Search Console (SA + AE)</div></div></div>
+            <div class="check-item"><div class="check-icon todo">○</div><div><div class="check-text todo">Core Web Vitals audit</div></div></div>
+            <div class="check-item"><div class="check-icon todo">○</div><div><div class="check-text todo">GA4 Analytics setup</div></div></div>
+            <div class="check-item"><div class="check-icon todo">○</div><div><div class="check-text todo">AdSense application</div></div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🚀 أدوات قادمة — أعلى حجم بحث</div>
+          <table class="data-table">
+            <thead><tr>
+              <th>الأداة</th>
+              <th>بحث/شهر</th>
+              <th>الحالة</th>
+            </tr></thead>
+            <tbody>
+              <tr><td>حاسبة الزكاة</td><td><span class="vol-bar" style="width:70px"></span>33K</td><td><span class="pill todo">○ لم تُبنَ</span></td></tr>
+              <tr><td>حاسبة ضريبة القيمة</td><td><span class="vol-bar" style="width:38px"></span>18K</td><td><span class="pill todo">○ لم تُبنَ</span></td></tr>
+              <tr><td>إزالة خلفية الصورة</td><td><span class="vol-bar" style="width:33px"></span>16K</td><td><span class="pill todo">○ لم تُبنَ</span></td></tr>
+              <tr><td>ضغط PDF</td><td><span class="vol-bar" style="width:25px"></span>12K</td><td><span class="pill todo">○ لم تُبنَ</span></td></tr>
+              <tr><td>ملخص النص</td><td><span class="vol-bar" style="width:19px"></span>9K</td><td><span class="pill todo">○ لم تُبنَ</span></td></tr>
+            </tbody>
+          </table>
+          <div style="margin-top:1rem;text-align:center">
+            <a href="#" onclick="nav(document.querySelector('[data-page=roadmap]'))" style="color:var(--cyan);font-size:.825rem;text-decoration:none">عرض خارطة الطريق الكاملة ←</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🌐 روابط البيئات</div>
+        <div class="links-grid">
+          <a href="https://adawix.com" target="_blank" class="quick-link"><span class="ql-icon">🌍</span> adawix.com (Production)</a>
+          <a href="https://adwaix.pages.dev" target="_blank" class="quick-link"><span class="ql-icon">🔧</span> adwaix.pages.dev (Staging)</a>
+          <a href="https://github.com/basharsawaqed/adwaix" target="_blank" class="quick-link"><span class="ql-icon">📁</span> GitHub Repo</a>
+          <a href="https://dash.cloudflare.com" target="_blank" class="quick-link"><span class="ql-icon">☁️</span> Cloudflare Dashboard</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SEO ── -->
+    <div class="page" id="page-seo">
+      <div class="page-header">
+        <h1>SEO &amp; تهيئة محركات البحث</h1>
+        <p>حالة تهيئة الموقع لهيمنة الـ 12 شهر على Google الخليج</p>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card green"><div class="stat-label">Schema Coverage</div><div class="stat-value">100%</div><div class="stat-sub">WebApp + HowTo + FAQ + Breadcrumb</div></div>
+        <div class="stat-card green"><div class="stat-label">hreflang Tags</div><div class="stat-value">26/26</div><div class="stat-sub">كل الصفحات مُهيَّأة</div></div>
+        <div class="stat-card amber"><div class="stat-label">Internal Links</div><div class="stat-value">0%</div><div class="stat-sub">مطلوب: 3 روابط لكل أداة</div></div>
+        <div class="stat-card amber"><div class="stat-label">Core Web Vitals</div><div class="stat-value">—</div><div class="stat-sub">لم يُقاس بعد</div></div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">🏗️ Schema.org Coverage</div>
+          <div class="checklist">
+            <div class="check-item"><div class="check-icon done">✓</div><div><div class="check-text done">Organization schema</div><div class="check-sub">index.html</div></div></div>
+            <div class="check-item"><div class="check-icon done">✓</div><div><div class="check-text done">WebApplication schema</div><div class="check-sub">كل 15 أداة</div></div></div>
+            <div class="check-item"><div class="check-icon done">✓</div><div><div class="check-text done">HowTo schema</div><div class="check-sub">كل 15 أداة</div></div></div>
+            <div class="check-item"><div class="check-icon done">✓</div><div><div class="check-text done">FAQPage schema</div><div class="check-sub">index + كل أداة</div></div></div>
+            <div class="check-item"><div class="check-icon done">✓</div><div><div class="check-text done">BreadcrumbList schema</div><div class="check-sub">3 مستويات للأدوات</div></div></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🌍 hreflang Gulf Targeting</div>
+          <div class="checklist">
+            <div class="check-item"><div class="check-icon done">✓</div><div><div class="check-text done">hreflang="ar" (عام)</div></div></div>
+            <div class="check-item"><div class="check-icon done">✓</div><div><div class="check-text done">hreflang="ar-SA" (السعودية)</div></div></div>
+            <div class="check-item"><div class="check-icon done">✓</div><div><div class="check-text done">hreflang="ar-AE" (الإمارات)</div></div></div>
+            <div class="check-item"><div class="check-icon done">✓</div><div><div class="check-text done">hreflang="ar-KW" (الكويت)</div></div></div>
+            <div class="check-item"><div class="check-icon done">✓</div><div><div class="check-text done">hreflang="x-default"</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">📋 مهام SEO القادمة</div>
+        <table class="data-table">
+          <thead><tr><th>المهمة</th><th>الأولوية</th><th>الوقت المقدر</th><th>الحالة</th></tr></thead>
+          <tbody>
+            <tr><td>Internal linking — كل أداة → 3 أدوات مرتبطة</td><td><span class="pill high">عالية</span></td><td>2 ساعة</td><td><span class="pill wip">قيد التنفيذ</span></td></tr>
+            <tr><td>Google Search Console — Saudi Arabia (sc-domain)</td><td><span class="pill high">عالية</span></td><td>30 دقيقة</td><td><span class="pill todo">○ مطلوب</span></td></tr>
+            <tr><td>Google Search Console — UAE</td><td><span class="pill high">عالية</span></td><td>15 دقيقة</td><td><span class="pill todo">○ مطلوب</span></td></tr>
+            <tr><td>Core Web Vitals — PageSpeed Insights</td><td><span class="pill high">عالية</span></td><td>1 ساعة</td><td><span class="pill todo">○ مطلوب</span></td></tr>
+            <tr><td>GA4 Analytics — إعداد وربط GSC</td><td><span class="pill wip">متوسطة</span></td><td>45 دقيقة</td><td><span class="pill todo">○ مطلوب</span></td></tr>
+            <tr><td>AdSense Application</td><td><span class="pill wip">متوسطة</span></td><td>—</td><td><span class="pill todo">○ ينتظر حركة مرور</span></td></tr>
+            <tr><td>Bing Webmaster Tools</td><td><span class="pill todo">منخفضة</span></td><td>20 دقيقة</td><td><span class="pill todo">○ اختياري</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── TOOLS ── -->
+    <div class="page" id="page-tools">
+      <div class="page-header">
+        <h1>مخزون الأدوات</h1>
+        <p>15 أداة مباشرة + 8 أدوات قادمة في Phase 1</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🟢 أدوات مباشرة — 15 أداة</div>
+        <table class="data-table">
+          <thead><tr><th>#</th><th>الأداة</th><th>التصنيف</th><th>الرابط</th><th>Schema</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>عداد الكلمات والحروف</td><td>نصوص</td><td><a href="/text-tools/word-counter/" target="_blank" style="color:var(--cyan)">↗</a></td><td><span class="pill live">✓</span></td></tr>
+            <tr><td>2</td><td>محول حالة النص</td><td>نصوص</td><td><a href="/text-tools/text-case-converter/" target="_blank" style="color:var(--cyan)">↗</a></td><td><span class="pill live">✓</span></td></tr>
+            <tr><td>3</td><td>مزيل النصوص المكررة</td><td>نصوص</td><td><a href="/text-tools/duplicate-remover/" target="_blank" style="color:var(--cyan)">↗</a></td><td><span class="pill live">✓</span></td></tr>
+            <tr><td>4</td><td>عداد تكرار الكلمات</td><td>نصوص</td><td><a href="/text-tools/word-frequency/" target="_blank" style="color:var(--cyan)">↗</a></td><td><span class="pill live">✓</span></td></tr>
+            <tr><td>5</td><td>مولد النصوص العشوائية</td><td>نصوص</td><td><a href="/text-tools/lorem-ipsum-arabic/" target="_blank" style="color:var(--cyan)">↗</a></td><td><span class="pill live">✓</span></td></tr>
+            <tr><td>6</td><td>ضغط الصور</td><td>صور</td><td><a href="/image-tools/image-compressor/" target="_blank" style="color:var(--cyan)">↗</a></td><td><span class="pill live">✓</span></td></tr>
+            <tr><td>7</td><td>تغيير حجم الصورة</td><td>صور</td><td><a href="/image-tools/image-resizer/" target="_blank" style="color:var(--cyan)">↗</a></td><td><span class="pill live">✓</span></td></tr>
+            <tr><td>8</td><td>محول صيغ الصور</td><td>صور</td><td><a href="/image-tools/image-converter/" target="_blank" style="color:var(--cyan)">↗</a></td><td><span class="pill live">✓</span></td></tr>
+            <tr><td>9</td><td>دمج ملفات PDF</td><td>PDF</td><td><a href="/pdf-tools/pdf-merger/" target="_blank" style="color:var(--cyan)">↗</a></td><td><span class="pill live">✓</span></td></tr>
+            <tr><td>10</td><td>تحويل الصور إلى PDF</td><td>PDF</td><td><a href="/pdf-tools/images-to-pdf/" target="_blank" style="color:var(--cyan)">↗</a></td><td><span class="pill live">✓</span></td></tr>
+            <tr><td>11</td><td>حاسبة القروض البنكية</td><td>مالية</td><td><a href="/financial-tools/loan-calculator/" target="_blank" style="color:var(--cyan)">↗</a></td><td><span class="pill live">✓</span></td></tr>
+            <tr><td>12</td><td>محول العملات</td><td>مالية</td><td><a href="/financial-tools/currency-converter/" target="_blank" style="color:var(--cyan)">↗</a></td><td><span class="pill live">✓</span></td></tr>
+            <tr><td>13</td><td>منسق JSON</td><td>مطورين</td><td><a href="/developer-tools/json-formatter/" target="_blank" style="color:var(--cyan)">↗</a></td><td><span class="pill live">✓</span></td></tr>
+            <tr><td>14</td><td>مولد كلمات المرور</td><td>مطورين</td><td><a href="/developer-tools/password-generator/" target="_blank" style="color:var(--cyan)">↗</a></td><td><span class="pill live">✓</span></td></tr>
+            <tr><td>15</td><td>مولد QR Code</td><td>مطورين</td><td><a href="/developer-tools/qr-generator/" target="_blank" style="color:var(--cyan)">↗</a></td><td><span class="pill live">✓</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🔴 أدوات Phase 1 — خط الأنابيب</div>
+        <table class="data-table">
+          <thead><tr><th>الأولوية</th><th>الأداة</th><th>الكلمة المفتاحية</th><th>بحث/شهر</th><th>التصنيف</th><th>الحالة</th></tr></thead>
+          <tbody>
+            <tr><td>1 🔥</td><td>حاسبة الزكاة</td><td>حاسبة الزكاة</td><td><span class="vol-bar" style="width:70px"></span>33K</td><td>مالية</td><td><span class="pill todo">○ لم تُبنَ</span></td></tr>
+            <tr><td>2</td><td>حاسبة ضريبة القيمة المضافة</td><td>حاسبة الضريبة</td><td><span class="vol-bar" style="width:38px"></span>18K</td><td>مالية</td><td><span class="pill todo">○ لم تُبنَ</span></td></tr>
+            <tr><td>3</td><td>إزالة خلفية الصورة</td><td>إزالة الخلفية</td><td><span class="vol-bar" style="width:33px"></span>16K</td><td>صور</td><td><span class="pill todo">○ لم تُبنَ</span></td></tr>
+            <tr><td>4</td><td>ضغط PDF</td><td>ضغط PDF</td><td><span class="vol-bar" style="width:25px"></span>12K</td><td>PDF</td><td><span class="pill todo">○ لم تُبنَ</span></td></tr>
+            <tr><td>5</td><td>ملخص النص</td><td>ملخص النص</td><td><span class="vol-bar" style="width:19px"></span>9K</td><td>نصوص</td><td><span class="pill todo">○ لم تُبنَ</span></td></tr>
+            <tr><td>6</td><td>تقسيم PDF</td><td>تقسيم PDF</td><td><span class="vol-bar" style="width:16px"></span>8K</td><td>PDF</td><td><span class="pill todo">○ لم تُبنَ</span></td></tr>
+            <tr><td>7</td><td>Base64 Encoder</td><td>base64 عربي</td><td>—</td><td>مطورين</td><td><span class="pill todo">○ لم تُبنَ</span></td></tr>
+            <tr><td>8</td><td>URL Encoder</td><td>url encode</td><td>—</td><td>مطورين</td><td><span class="pill todo">○ لم تُبنَ</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── ROADMAP ── -->
+    <div class="page" id="page-roadmap">
+      <div class="page-header">
+        <h1>خارطة الطريق — 12 شهراً</h1>
+        <p>خطة هيمنة Google الخليج 2025–2026</p>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <div class="card">
+            <div class="card-title">🎯 Phase 1: الأساس (شهر 1-3)</div>
+            <div class="timeline">
+              <div class="tl-item">
+                <div class="tl-left"><div class="tl-dot done">✓</div><div class="tl-line"></div></div>
+                <div class="tl-content">
+                  <div class="tl-title">Technical SEO</div>
+                  <div class="tl-date">مكتمل</div>
+                  <div class="tl-tasks">
+                    <div class="tl-task done-t"><div class="dot"></div>Meta tags + OG + Twitter</div>
+                    <div class="tl-task done-t"><div class="dot"></div>Schema.org complete</div>
+                    <div class="tl-task done-t"><div class="dot"></div>hreflang Gulf</div>
+                    <div class="tl-task done-t"><div class="dot"></div>BreadcrumbList</div>
+                    <div class="tl-task done-t"><div class="dot"></div>Favicon + manifest</div>
+                    <div class="tl-task done-t"><div class="dot"></div>EN/AR toggle</div>
+                  </div>
+                </div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-left"><div class="tl-dot active">▶</div><div class="tl-line"></div></div>
+                <div class="tl-content">
+                  <div class="tl-title">Content &amp; Linking</div>
+                  <div class="tl-date">قيد التنفيذ</div>
+                  <div class="tl-tasks">
+                    <div class="tl-task"><div class="dot"></div>Internal linking (15 أداة × 3)</div>
+                    <div class="tl-task"><div class="dot"></div>Google Search Console SA + AE</div>
+                    <div class="tl-task"><div class="dot"></div>Core Web Vitals</div>
+                    <div class="tl-task"><div class="dot"></div>GA4 setup</div>
+                  </div>
+                </div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-left"><div class="tl-dot future">3</div><div class="tl-line"></div></div>
+                <div class="tl-content">
+                  <div class="tl-title">الأدوات الجديدة</div>
+                  <div class="tl-date">قادم</div>
+                  <div class="tl-tasks">
+                    <div class="tl-task"><div class="dot"></div>حاسبة الزكاة (33K)</div>
+                    <div class="tl-task"><div class="dot"></div>حاسبة الضريبة (18K)</div>
+                    <div class="tl-task"><div class="dot"></div>إزالة الخلفية (16K)</div>
+                    <div class="tl-task"><div class="dot"></div>ضغط PDF (12K)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <div class="card-title">📈 Phase 2: النمو (شهر 4-6)</div>
+            <div class="timeline">
+              <div class="tl-item">
+                <div class="tl-left"><div class="tl-dot future">1</div><div class="tl-line"></div></div>
+                <div class="tl-content">
+                  <div class="tl-title">أدوات متقدمة</div>
+                  <div class="tl-date">Q3 2025</div>
+                  <div class="tl-tasks">
+                    <div class="tl-task"><div class="dot"></div>ملخص النص (AI)</div>
+                    <div class="tl-task"><div class="dot"></div>تقسيم PDF</div>
+                    <div class="tl-task"><div class="dot"></div>Base64 + URL Encoder</div>
+                    <div class="tl-task"><div class="dot"></div>حاسبة التقاعد</div>
+                  </div>
+                </div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-left"><div class="tl-dot future">2</div><div class="tl-line"></div></div>
+                <div class="tl-content">
+                  <div class="tl-title">تحسين Conversions</div>
+                  <div class="tl-date">Q3 2025</div>
+                  <div class="tl-tasks">
+                    <div class="tl-task"><div class="dot"></div>AdSense integration</div>
+                    <div class="tl-task"><div class="dot"></div>Email capture</div>
+                    <div class="tl-task"><div class="dot"></div>Tool bookmarking</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">🏆 Phase 3: الهيمنة (شهر 7-12)</div>
+            <div class="timeline">
+              <div class="tl-item">
+                <div class="tl-left"><div class="tl-dot future">1</div><div class="tl-line"></div></div>
+                <div class="tl-content">
+                  <div class="tl-title">30+ أداة</div>
+                  <div class="tl-date">Q4 2025</div>
+                  <div class="tl-tasks">
+                    <div class="tl-task"><div class="dot"></div>إجمالي 30+ أداة مباشرة</div>
+                    <div class="tl-task"><div class="dot"></div>Blog + كتابة محتوى SEO</div>
+                  </div>
+                </div>
+              </div>
+              <div class="tl-item">
+                <div class="tl-left"><div class="tl-dot future">2</div></div>
+                <div class="tl-content">
+                  <div class="tl-title">المركز الأول</div>
+                  <div class="tl-date">Q1 2026</div>
+                  <div class="tl-tasks">
+                    <div class="tl-task"><div class="dot"></div>صفحة 1 لـ 20+ كلمة مفتاحية</div>
+                    <div class="tl-task"><div class="dot"></div">10K+ زائر / شهر</div>
+                    <div class="tl-task"><div class="dot"></div>Featured Snippets</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── LINKS ── -->
+    <div class="page" id="page-links">
+      <div class="page-header">
+        <h1>روابط سريعة</h1>
+        <p>وصول سريع لجميع الأدوات والخدمات المرتبطة بالمشروع</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title">🌐 الموقع</div>
+        <div class="links-grid">
+          <a href="https://adawix.com" target="_blank" class="quick-link"><span class="ql-icon">🏠</span> الصفحة الرئيسية</a>
+          <a href="https://adawix.com/text-tools/" target="_blank" class="quick-link"><span class="ql-icon">📝</span> أدوات النصوص</a>
+          <a href="https://adawix.com/image-tools/" target="_blank" class="quick-link"><span class="ql-icon">🖼️</span> أدوات الصور</a>
+          <a href="https://adawix.com/pdf-tools/" target="_blank" class="quick-link"><span class="ql-icon">📄</span> أدوات PDF</a>
+          <a href="https://adawix.com/financial-tools/" target="_blank" class="quick-link"><span class="ql-icon">💰</span> الأدوات المالية</a>
+          <a href="https://adawix.com/developer-tools/" target="_blank" class="quick-link"><span class="ql-icon">💻</span> أدوات المطورين</a>
+          <a href="https://adawix.com/sitemap.xml" target="_blank" class="quick-link"><span class="ql-icon">🗺️</span> Sitemap XML</a>
+          <a href="https://adawix.com/pages/sitemap-page.html" target="_blank" class="quick-link"><span class="ql-icon">📋</span> خريطة الموقع</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">⚙️ بنية تحتية</div>
+        <div class="links-grid">
+          <a href="https://github.com/basharsawaqed/adwaix" target="_blank" class="quick-link"><span class="ql-icon">🐙</span> GitHub Repo</a>
+          <a href="https://dash.cloudflare.com" target="_blank" class="quick-link"><span class="ql-icon">☁️</span> Cloudflare Pages</a>
+          <a href="https://adwaix.pages.dev" target="_blank" class="quick-link"><span class="ql-icon">🔧</span> Staging Site</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">📊 تحليلات و SEO</div>
+        <div class="links-grid">
+          <a href="https://search.google.com/search-console" target="_blank" class="quick-link"><span class="ql-icon">🔍</span> Google Search Console</a>
+          <a href="https://analytics.google.com" target="_blank" class="quick-link"><span class="ql-icon">📈</span> Google Analytics</a>
+          <a href="https://pagespeed.web.dev/?url=https://adawix.com" target="_blank" class="quick-link"><span class="ql-icon">⚡</span> PageSpeed Insights</a>
+          <a href="https://www.google.com/webmasters/tools/richresults?url=https://adawix.com" target="_blank" class="quick-link"><span class="ql-icon">🧪</span> Rich Results Test</a>
+          <a href="https://validator.schema.org/?url=https://adawix.com" target="_blank" class="quick-link"><span class="ql-icon">✅</span> Schema Validator</a>
+          <a href="https://www.google.com/adsense" target="_blank" class="quick-link"><span class="ql-icon">💵</span> Google AdSense</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SETTINGS ── -->
+    <div class="page" id="page-settings">
+      <div class="page-header">
+        <h1>الإعدادات</h1>
+        <p>إعدادات لوحة التحكم</p>
+      </div>
+
+      <div class="card" style="max-width:480px">
+        <div class="card-title">🔐 تغيير كلمة المرور</div>
+        <p style="color:var(--muted);font-size:.875rem;margin-bottom:1.25rem">
+          كلمة المرور تُخزَّن كـ SHA-256 hash في المتصفح فقط.<br>
+          يمكنك تغييرها في أي وقت.
+        </p>
+        <div class="login-field">
+          <input type="password" id="new-pass-1" placeholder="كلمة المرور الجديدة" style="margin-bottom:.75rem;display:block" />
+        </div>
+        <div class="login-field">
+          <input type="password" id="new-pass-2" placeholder="تأكيد كلمة المرور" />
+        </div>
+        <button class="login-btn" onclick="changePassword()" style="margin-top:1rem">تحديث كلمة المرور</button>
+        <p id="pass-change-msg" style="font-size:.825rem;margin-top:.75rem;display:none"></p>
+      </div>
+
+      <div class="card" style="max-width:480px;margin-top:1.5rem">
+        <div class="card-title">ℹ️ معلومات النظام</div>
+        <table class="data-table">
+          <tbody>
+            <tr><td style="color:var(--muted)">إصدار لوحة التحكم</td><td>v1.0.0</td></tr>
+            <tr><td style="color:var(--muted)">المنصة</td><td>Cloudflare Pages (Static)</td></tr>
+            <tr><td style="color:var(--muted)">نوع المصادقة</td><td>Client-side SHA-256</td></tr>
+            <tr><td style="color:var(--muted)">آخر تحديث</td><td id="last-update">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  // ── Default password hash (SHA-256 of "adawix2026")
+  const DEFAULT_HASH = "1f9e9b5a3cf82930452c8e772f7912b3a9e792659eebb55ff9e96879431b5005";
+
+  async function sha256(str) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
+  }
+
+  function getStoredHash() {
+    return localStorage.getItem('adawix_admin_hash') || DEFAULT_HASH;
+  }
+
+  // Auto-login if session active
+  window.addEventListener('load', () => {
+    if (sessionStorage.getItem('adawix_admin_authed') === '1') showAdmin();
+    document.getElementById('pass-input').addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin(); });
+    document.getElementById('last-update').textContent = new Date().toLocaleDateString('ar-SA');
+  });
+
+  async function tryLogin() {
+    const pass = document.getElementById('pass-input').value;
+    if (!pass) return;
+    const hash = await sha256(pass);
+    if (hash === getStoredHash()) {
+      sessionStorage.setItem('adawix_admin_authed', '1');
+      showAdmin();
+    } else {
+      const err = document.getElementById('login-error');
+      err.style.display = 'block';
+      err.style.animation = 'none';
+      requestAnimationFrame(() => { err.style.animation = 'shake .3s'; });
+      document.getElementById('pass-input').value = '';
+      document.getElementById('pass-input').focus();
+    }
+  }
+
+  function showAdmin() {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('admin-screen').style.display = 'block';
+  }
+
+  function logout() {
+    sessionStorage.removeItem('adawix_admin_authed');
+    document.getElementById('admin-screen').style.display = 'none';
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('pass-input').value = '';
+  }
+
+  function nav(el) {
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    el.classList.add('active');
+    const pageId = 'page-' + el.dataset.page;
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(pageId).classList.add('active');
+    return false;
+  }
+
+  async function changePassword() {
+    const p1 = document.getElementById('new-pass-1').value;
+    const p2 = document.getElementById('new-pass-2').value;
+    const msg = document.getElementById('pass-change-msg');
+    if (!p1 || p1.length < 6) { msg.style.color = 'var(--red)'; msg.textContent = 'كلمة المرور قصيرة جداً (6 أحرف على الأقل)'; msg.style.display = 'block'; return; }
+    if (p1 !== p2) { msg.style.color = 'var(--red)'; msg.textContent = 'كلمتا المرور غير متطابقتين'; msg.style.display = 'block'; return; }
+    const hash = await sha256(p1);
+    localStorage.setItem('adawix_admin_hash', hash);
+    msg.style.color = 'var(--green)'; msg.textContent = '✓ تم تحديث كلمة المرور بنجاح'; msg.style.display = 'block';
+    document.getElementById('new-pass-1').value = '';
+    document.getElementById('new-pass-2').value = '';
+  }
+</script>
+</body>
+</html>
